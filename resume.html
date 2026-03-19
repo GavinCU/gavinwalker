@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+    <!-- Security meta tags -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.instagram.com; img-src 'self' https://img.youtube.com https://i.ytimg.com data: blob:; frame-src https://www.youtube.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self';" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume — Gavin Walker</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .resume-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    /* SIDEBAR */
+    .resume-sidebar { position: sticky; top: 80px; }
+
+    .resume-actions { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+
+    .resume-nav-list { display: flex; flex-direction: column; gap: 2px; }
+
+    .r-nav-item {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text3);
+      padding: 10px 14px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: none;
+      text-align: left;
+      transition: all 0.15s;
+      text-decoration: none;
+      display: block;
+    }
+    .r-nav-item:hover { color: var(--text2); border-color: var(--border); }
+    .r-nav-item.active { background: var(--mid); border-color: var(--border2); color: var(--gold); }
+
+    /* PDF VIEWER */
+    .pdf-viewer-wrap {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      min-height: 780px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pdf-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--darker);
+    }
+
+    .pdf-toolbar-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+
+    .pdf-viewer {
+      flex: 1;
+      width: 100%;
+      min-height: 720px;
+      border: none;
+      background: var(--surface);
+    }
+
+    .pdf-placeholder {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 4rem;
+      min-height: 600px;
+    }
+
+    .pdf-placeholder-icon {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 80px;
+      color: var(--gold-dim);
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    .pdf-placeholder-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 1.5px;
+      color: var(--text);
+      text-align: center;
+    }
+
+    .pdf-placeholder-text {
+      font-family: 'Crimson Pro', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text2);
+      text-align: center;
+      max-width: 380px;
+      line-height: 1.7;
+    }
+
+    .pdf-code {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--gold-dim);
+      background: var(--darker);
+      border: 1px solid var(--border);
+      padding: 0.6rem 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* TIMELINE */
+    .timeline { display: flex; flex-direction: column; }
+
+    .tl-item {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .tl-item:last-child { border-bottom: none; }
+
+    .tl-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text3);
+      letter-spacing: 0.05em;
+      line-height: 1.7;
+      padding-top: 3px;
+    }
+
+    .tl-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .tl-org {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 0.6rem;
+    }
+
+    .tl-desc {
+      font-family: 'Crimson Pro', serif;
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.75;
+    }
+
+    .tl-bullets {
+      list-style: none;
+      padding: 0;
+      margin-top: 0.5rem;
+    }
+    .tl-bullets li {
+      font-family: 'Crimson Pro', serif;
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.75;
+      padding-left: 1.25rem;
+      position: relative;
+      margin-bottom: 0.3rem;
+    }
+    .tl-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gold-dim);
+    }
+
+    .r-section { margin-bottom: 3.5rem; }
+
+    .r-section-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      letter-spacing: 2px;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .r-section-label span {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--gold-dim);
+      letter-spacing: 2px;
+      font-weight: 400;
+    }
+
+    @media (max-width: 900px) {
+      .resume-layout { grid-template-columns: 1fr; }
+      .resume-sidebar { position: static; }
+      .resume-nav-list { flex-direction: row; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">GW</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html" class="hide-mobile">Projects</a></li>
+      <li><a href="media.html">Media</a></li>
+      <li><a href="lead4000.html" class="hide-mobile">LEAD 4000</a></li>
+      <li><a href="resume.html" class="active">Resume</a></li>
+      <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-bg">CV</div>
+    <div class="page-eyebrow">Background</div>
+    <h1 class="page-title">My <span>Resume</span></h1>
+    <p class="page-sub">Education, experience, leadership, and skills — all in one place.</p>
+  </div>
+
+  <div class="gold-rule"></div>
+
+  <section class="section" style="padding-top: 3rem;">
+    <div class="resume-layout">
+
+      <!-- SIDEBAR -->
+      <div class="resume-sidebar">
+        
+        
+        <div style="margin-top:2rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+          <div style="font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--text3); margin-bottom:0.75rem; padding-left:14px;">Quick Info</div>
+          <div style="display:flex; flex-direction:column; gap:2px;">
+            <div style="padding:0.75rem 1rem; background:var(--mid); border:1px solid var(--border); font-size:12px; color:var(--text2);">
+              <span style="color:var(--text3); font-size:10px; letter-spacing:1.5px; text-transform:uppercase; display:block; margin-bottom:2px;">Status</span>
+              <span style="color:var(--gold); font-family:'Bebas Neue',sans-serif; letter-spacing:1px;">Open to Internships</span>
+            </div>
+            
+            <div style="padding:0.75rem 1rem; background:var(--mid); border:1px solid var(--border); font-size:12px; color:var(--text2);">
+              <span style="color:var(--text3); font-size:10px; letter-spacing:1.5px; text-transform:uppercase; display:block; margin-bottom:2px;">Location</span>
+              Boulder, CO · Open to Remote
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESUME CONTENT -->
+      <div>
+
+        <!-- PDF VIEWER -->
+        <div class="pdf-viewer-wrap reveal" style="margin-bottom: 3rem;">
+          <div class="pdf-toolbar">
+            <span class="pdf-toolbar-label">Resume · PDF Preview</span>
+            <a href="gwresume.pdf" download class="btn-gold" style="padding: 6px 16px; font-size: 10px;">↓ Download</a>
+          </div>
+          <!-- OPTION A: Uncomment this when you have your PDF file -->
+          <embed src="gwresume.pdf" type="application/pdf" class="pdf-viewer">
+          <!-- OPTION B: Placeholder shown until you add the PDF -->
+        
+        
+
+  <footer>
+    <span class="footer-logo">GW</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="media.html">Media</a>
+      <a href="lead4000.html">LEAD 4000</a>
+      <a href="resume.html">Resume</a>
+    </div>
+    <span class="footer-text">Sko Buffs 🦬</span>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    function setActive(el) {
+      document.querySelectorAll('.r-nav-item').forEach(a => a.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    // Auto-highlight nav item on scroll
+    const sections = document.querySelectorAll('.r-section');
+    const navItems = document.querySelectorAll('.r-nav-item');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      });
+      navItems.forEach(a => {
+        a.classList.remove('active');
+        if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

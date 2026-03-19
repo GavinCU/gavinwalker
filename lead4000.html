@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+    <!-- Security meta tags -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.instagram.com; img-src 'self' https://img.youtube.com https://i.ytimg.com data: blob:; frame-src https://www.youtube.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self';" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LEAD 4000 — Gavin Walker</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .lead-intro {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lead-intro::before {
+      content: 'LEAD';
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 160px;
+      color: rgba(201,162,39,0.04);
+      right: -10px;
+      bottom: -20px;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .lead-intro-body {
+      font-family: 'Crimson Pro', serif;
+      font-size: 17px;
+      color: var(--text2);
+      line-height: 1.85;
+      max-width: 680px;
+    }
+    .lead-intro-body strong { color: var(--text); font-weight: 600; }
+
+    .lead-meta {
+      display: flex;
+      gap: 2px;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .lead-meta-item {
+      background: var(--darker);
+      border: 1px solid var(--border);
+      padding: 0.6rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .lead-meta-label {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+
+    .lead-meta-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 15px;
+      letter-spacing: 1px;
+      color: var(--text);
+    }
+
+    /* ASSIGNMENT GRID */
+    .assignments-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .assignment-card {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .assignment-card:hover { border-color: var(--border2); }
+
+    .assignment-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+    .assignment-card:hover::after { width: 100%; }
+
+    .assignment-card.empty {
+      border-style: dashed;
+      opacity: 0.6;
+    }
+
+    .assignment-header {
+      padding: 1.5rem 2rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .a-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 52px;
+      color: rgba(201,162,39,0.06);
+      position: absolute;
+      top: 0.75rem; right: 1.25rem;
+      line-height: 1;
+    }
+
+    .a-badge {
+      display: inline-block;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border: 1px solid var(--border2);
+      color: var(--gold-dim);
+      background: rgba(201,162,39,0.06);
+      margin-bottom: 0.75rem;
+    }
+
+    .a-badge.submitted {
+      border-color: rgba(60,180,100,0.4);
+      color: rgba(60,180,100,0.8);
+      background: rgba(60,180,100,0.07);
+    }
+
+    .a-badge.pending {
+      border-color: rgba(201,162,39,0.3);
+      color: var(--gold-dim);
+      background: rgba(201,162,39,0.05);
+    }
+
+    .a-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 1.5px;
+      color: var(--text);
+      line-height: 1.1;
+    }
+
+    .assignment-body {
+      padding: 1.5rem 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .a-desc {
+      font-family: 'Crimson Pro', serif;
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.75;
+    }
+
+    .a-placeholder {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--text3);
+      padding: 1rem;
+      background: var(--darker);
+      border: 1px dashed var(--border);
+      line-height: 1.6;
+    }
+
+    .a-reflection {
+      background: rgba(201,162,39,0.04);
+      border-left: 2px solid var(--gold-dim);
+      padding: 1rem 1.25rem;
+    }
+
+    .a-reflection-label {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 0.4rem;
+    }
+
+    .a-reflection-text {
+      font-family: 'Crimson Pro', serif;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--text2);
+      line-height: 1.7;
+    }
+
+    .assignment-footer {
+      padding: 0.85rem 2rem;
+      border-top: 1px solid var(--border);
+      background: var(--darker);
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .a-link {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .a-link:hover { color: var(--gold); }
+
+    /* REFLECTION SECTION */
+    .reflection-section {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+    }
+
+    .reflection-card {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .reflection-card::before {
+      content: '"';
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 200px;
+      color: rgba(201,162,39,0.04);
+      top: -20px;
+      left: 10px;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .reflection-text {
+      font-family: 'Crimson Pro', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--text2);
+      line-height: 1.85;
+      position: relative;
+      z-index: 1;
+    }
+    .reflection-text strong { color: var(--text); font-style: normal; }
+
+    @media (max-width: 900px) {
+      .assignments-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">GW</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html" class="hide-mobile">Projects</a></li>
+      <li><a href="media.html">Media</a></li>
+      <li><a href="lead4000.html" class="active">LEAD 4000</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-bg">LEAD</div>
+    <div class="page-eyebrow">Capstone Course</div>
+    <h1 class="page-title">LEAD <span>4000</span></h1>
+    <p class="page-sub">Leadership capstone assignments, reflections, and course deliverables all in one place.</p>
+  </div>
+
+  <div class="gold-rule"></div>
+
+  <section class="section" style="padding-top: 3rem;">
+
+    <!-- COURSE INTRO -->
+    <div class="lead-intro reveal">
+      <div class="section-eyebrow" style="margin-bottom:0.75rem;">About the Course</div>
+      <div class="lead-intro-body">
+        <p><strong>LEAD 4000</strong> is a capstone leadership course taken as part of the Leadership Studies minor at the University of Colorado Boulder. The course focuses on integrating leadership theory with personal practice, professional development, and real-world application.</p>
+        <p style="margin-top:0.75rem;">All assignments, reflections, and deliverables from the course in one place, part of a broader eportfolio documenting my academic and professional development at CU Boulder.</p>
+      </div>
+      <div class="lead-meta">
+        <div class="lead-meta-item">
+          <span class="lead-meta-label">Course</span>
+          <span class="lead-meta-val">LEAD 4000</span>
+        </div>
+        <div class="lead-meta-item">
+          <span class="lead-meta-label">Minor</span>
+          <span class="lead-meta-val">Leadership Studies</span>
+        </div>
+        <div class="lead-meta-item">
+          <span class="lead-meta-label">Institution</span>
+          <span class="lead-meta-val">CU Boulder</span>
+        </div>
+        <div class="lead-meta-item">
+          <span class="lead-meta-label">Semester</span>
+          <span class="lead-meta-val">Spring 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEADERSHIP COURSEWORK -->
+    <div class="section-eyebrow reveal" style="margin-bottom:0.75rem; margin-top:3rem;">Leadership Coursework</div>
+    <h2 class="reveal">Minor Coursework</h2>
+    <p class="section-intro reveal">The courses that built my foundation in leadership theory, practice, and personal reflection throughout the Leadership Studies Minor.</p>
+
+    <div class="assignments-grid" style="margin-bottom:4rem;">
+
+      <!-- PRLC 1810 -->
+      <div class="assignment-card reveal">
+        <div class="assignment-header">
+          <div class="a-num">01</div>
+          <div class="a-badge" style="background:rgba(201,162,39,0.12);color:var(--gold);border-color:var(--border2);">Completed</div>
+          <div class="a-title">PRLC 1810 — Leadership Foundations and Applications I</div>
+        </div>
+        <div class="assignment-body">
+          <p class="a-reflection-text" style="margin-bottom:1rem;">
+            This introductory course established a foundation for understanding what leadership actually is. Moving beyond the idea that leadership simply means being in charge. The course explored a wide range of leadership styles and frameworks, examining how different approaches apply across different environments, communities, and challenges in the real world.
+          </p>
+          <div class="a-reflection">
+            <div class="a-reflection-label">Knowledge & Skills Gained</div>
+            <p class="a-reflection-text">
+              The most significant takeaway was learning that no single leadership style fits every situation. Understanding how to read a context and adapt accordingly.
+            </p>
+          </div>
+        </div>
+        <div class="assignment-footer">
+          <span class="a-link" style="cursor:default;color:var(--text3);">LEAD Minor · Foundation</span>
+        </div>
+      </div>
+
+      <!-- PRLC 1820 -->
+      <div class="assignment-card reveal reveal-d1">
+        <div class="assignment-header">
+          <div class="a-num">02</div>
+          <div class="a-badge" style="background:rgba(201,162,39,0.12);color:var(--gold);border-color:var(--border2);">Completed</div>
+          <div class="a-title">PRLC 1820 — Leadership Foundations and Applications II</div>
+        </div>
+        <div class="assignment-body">
+          <p class="a-reflection-text" style="margin-bottom:1rem;">
+            Building directly on the first foundations course, PRLC 1820 shifted the focus from individual leadership styles to the dynamics of leading within groups and teams. The course explored how leaders cultivate collaboration, navigate group tension, and create environments where people can do their best work together.
+          </p>
+          <div class="a-reflection">
+            <div class="a-reflection-label">Knowledge & Skills Gained</div>
+            <p class="a-reflection-text">
+              This course gave me practical language and frameworks for something I was already doing intuitively. PRLC 1820 helped me understand the theory behind what makes teams function and gave me tools to be more intentional about how I show up in collective spaces.
+            </p>
+          </div>
+        </div>
+        <div class="assignment-footer">
+          <span class="a-link" style="cursor:default;color:var(--text3);">LEAD Minor · Foundation</span>
+        </div>
+      </div>
+
+      <!-- ENLP 3100 -->
+      <div class="assignment-card reveal">
+        <div class="assignment-header">
+          <div class="a-num">03</div>
+          <div class="a-badge" style="background:rgba(201,162,39,0.12);color:var(--gold);border-color:var(--border2);">Completed</div>
+          <div class="a-title">ENLP 3100 — Complex Leadership Challenges</div>
+        </div>
+        <div class="assignment-body">
+          <p class="a-reflection-text" style="margin-bottom:1rem;">
+            ENLP 3100 marked a shift into deeper, more challenging territory. Through intensive readings and reflective work, the course asked students to examine what it truly means to lead well not just in practice but in character. The focus was on self-reflection as an ongoing leadership practice, pushing past surface-level answers to sit with harder questions about identity, values, and growth.
+          </p>
+          <div class="a-reflection">
+            <div class="a-reflection-label">Knowledge & Skills Gained</div>
+            <p class="a-reflection-text">
+              The readings in this course were the most challenging I had encountered in the minor and the most rewarding. They pushed me to interrogate my own assumptions about what a good leader looks like and recognize the ways I had internalized narratives that did not fully reflect who I want to be.
+            </p>
+          </div>
+        </div>
+        <div class="assignment-footer">
+          <span class="a-link" style="cursor:default;color:var(--text3);">LEAD Minor · Elective</span>
+        </div>
+      </div>
+
+      <!-- PRLC 3800 -->
+      <div class="assignment-card reveal reveal-d1">
+        <div class="assignment-header">
+          <div class="a-num">04</div>
+          <div class="a-badge" style="background:rgba(201,162,39,0.12);color:var(--gold);border-color:var(--border2);">Completed</div>
+          <div class="a-title">PRLC 3800 — Global Inquiry and Leadership</div>
+        </div>
+        <div class="assignment-body">
+          <p class="a-reflection-text" style="margin-bottom:1rem;">
+            PRLC 3800 introduced the concept of "wicked problems" complex, systemic issues that resist straightforward solutions and require leaders to think across disciplines, timelines, and perspectives. The course examined what it means to lead when there is no clear answer, only a set of tradeoffs, stakeholders, and competing values to navigate responsibly.
+          </p>
+          <div class="a-reflection">
+            <div class="a-reflection-label">Knowledge & Skills Gained</div>
+            <p class="a-reflection-text">
+              Understanding wicked problems reframed how I think about leadership entirely. It taught me that the ability to hold complexity without needing to resolve it quickly is itself a leadership skill. That thinking carries directly into my LEAD 4000 practicum, where my team is analyzing fraud in Boulder County.
+            </p>
+          </div>
+        </div>
+        <div class="assignment-footer">
+          <span class="a-link" style="cursor:default;color:var(--text3);">LEAD Minor · Elective</span>
+        </div>
+      </div>
+
+      <!-- LEAD 4000 -->
+      <div class="assignment-card reveal" style="border-color:rgba(201,162,39,0.3);">
+        <div class="assignment-header">
+          <div class="a-num">05</div>
+          <div class="a-badge" style="background:rgba(58,125,68,0.15);color:#5aaa6a;border-color:rgba(58,125,68,0.3);">In Progress</div>
+          <div class="a-title">LEAD 4000 — Leadership in Context & Emerging Challenges: A Capstone</div>
+        </div>
+        <div class="assignment-body">
+          <p class="a-reflection-text" style="margin-bottom:1rem;">
+            LEAD 4000 is the capstone course for the Leadership Studies Minor at CU Boulder. A praxis-based seminar that integrates leadership theory, personal reflection, and real-world action. The course challenges students to work within complex systems, engage in root cause analysis, and apply change strategies in partnership with a real community organization.
+          </p>
+          <div class="a-reflection">
+            <div class="a-reflection-label">Current Focus — Spring 2026</div>
+            <p class="a-reflection-text">
+              My team is currently past the halfway point of the semester, focused on <strong>fraud in Boulder County</strong> as our systems issue. We are conducting stakeholder interviews, root cause analysis, and issue mapping to understand the structures that enable and perpetuate financial fraud in the community. This work is pushing me to synthesize everything across the minor.
+            </p>
+          </div>
+        </div>
+        <div class="assignment-footer">
+          <span class="a-link" style="cursor:default;color:var(--gold);">LEAD Minor · Capstone · Spring 2026</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ASSIGNMENTS 
+    <div class="section-eyebrow reveal" style="margin-bottom:0.75rem;">Assignments</div>
+    <h2 class="reveal">Course Deliverables</h2>
+    <p class="section-intro reveal">LEAD 4000 assignments and reflections added as the semester progresses.</p>
+
+    <div class="assignments-grid">-->
+
+      <!-- Assignment 1 
+      <div class="assignment-card reveal">
+        <div class="assignment-header">
+          <div class="a-num">01</div>
+          <div class="a-badge pending">Pending</div>
+          <div class="a-title">Assignment 1 Title</div>
+        </div>
+        <div class="assignment-body">
+          <div class="a-placeholder">
+            Replace this with your actual assignment title and description. Add the assignment prompt, what you submitted, and any key takeaways from completing it.
+          </div>
+          <div class="a-reflection">
+            <div class="a-reflection-label">Reflection</div>
+            <p class="a-reflection-text">What did this assignment teach you about yourself as a leader? Add your reflection here once completed.</p>
+          </div>
+        </div>
+        <div class="assignment-footer">
+          <a href="#" class="a-link">View Submission →</a>
+        </div>
+      </div>-->
+
+      <!-- Assignment 2 
+      <div class="assignment-card reveal reveal-d1">
+        <div class="assignment-header">
+          <div class="a-num">02</div>
+          <div class="a-badge pending">Pending</div>
+          <div class="a-title">Assignment 2 Title</div>
+        </div>
+        <div class="assignment-body">
+          <div class="a-placeholder">
+            Replace this with your actual assignment title and description. Add the assignment prompt, what you submitted, and any key takeaways from completing it.
+          </div>
+          <div class="a-reflection">
+            <div class="a-reflection-label">Reflection</div>
+            <p class="a-reflection-text">What did this assignment teach you about yourself as a leader? Add your reflection here once completed.</p>
+          </div>
+        </div>
+        <div class="assignment-footer">
+          <a href="#" class="a-link">View Submission →</a>
+        </div>
+      </div>-->
+
+      <!-- Assignment 3 
+      <div class="assignment-card reveal reveal-d2">
+        <div class="assignment-header">
+          <div class="a-num">03</div>
+          <div class="a-badge pending">Pending</div>
+          <div class="a-title">Assignment 3 Title</div>
+        </div>
+        <div class="assignment-body">
+          <div class="a-placeholder">
+            Replace this with your actual assignment title and description. Add the assignment prompt, what you submitted, and any key takeaways from completing it.
+          </div>
+          <div class="a-reflection">
+            <div class="a-reflection-label">Reflection</div>
+            <p class="a-reflection-text">What did this assignment teach you about yourself as a leader? Add your reflection here once completed.</p>
+          </div>
+        </div>
+        <div class="assignment-footer">
+          <a href="#" class="a-link">View Submission →</a>
+        </div>
+      </div>-->
+
+      <!-- Assignment 4 
+      <div class="assignment-card reveal reveal-d3">
+        <div class="assignment-header">
+          <div class="a-num">04</div>
+          <div class="a-badge pending">Pending</div>
+          <div class="a-title">Assignment 4 Title</div>
+        </div>
+        <div class="assignment-body">
+          <div class="a-placeholder">
+            Replace this with your actual assignment title and description. Add the assignment prompt, what you submitted, and any key takeaways from completing it.
+          </div>
+          <div class="a-reflection">
+            <div class="a-reflection-label">Reflection</div>
+            <p class="a-reflection-text">What did this assignment teach you about yourself as a leader? Add your reflection here once completed.</p>
+          </div>
+        </div>
+        <div class="assignment-footer">
+          <a href="#" class="a-link">View Submission →</a>
+        </div>
+      </div> -->
+
+      <!-- Assignment 5 
+      <div class="assignment-card reveal">
+        <div class="assignment-header">
+          <div class="a-num">05</div>
+          <div class="a-badge pending">Pending</div>
+          <div class="a-title">Assignment 5 Title</div>
+        </div>
+        <div class="assignment-body">
+          <div class="a-placeholder">
+            Replace this with your actual assignment title and description. Add the assignment prompt, what you submitted, and any key takeaways from completing it.
+          </div>
+          <div class="a-reflection">
+            <div class="a-reflection-label">Reflection</div>
+            <p class="a-reflection-text">What did this assignment teach you about yourself as a leader? Add your reflection here once completed.</p>
+          </div>
+        </div>
+        <div class="assignment-footer">
+          <a href="#" class="a-link">View Submission →</a>
+        </div>
+      </div>-->
+
+      <!-- Add More Placeholder 
+      <div class="assignment-card empty reveal reveal-d1">
+        <div class="assignment-header">
+          <div class="a-num">+</div>
+          <div class="a-badge pending">Coming Soon</div>
+          <div class="a-title">Future Assignment</div>
+        </div>
+        <div class="assignment-body">
+          <div class="a-placeholder">
+            Duplicate any assignment card above and update the number, title, description, and reflection to add more assignments as the semester progresses.
+          </div>
+        </div>
+        <div class="assignment-footer">
+          <span class="a-link" style="cursor: default;">Not Yet Assigned</span>
+        </div>
+      </div>
+
+    </div>
+  </section>-->
+
+  <!-- CAPSTONE REFLECTION 
+  <section class="reflection-section">
+    <div class="section">
+      <div class="section-eyebrow reveal">Capstone Reflection</div>
+      <h2 class="reveal">Overall Takeaways</h2>
+      <p class="section-intro reveal">How LEAD 4000 connects to your broader development as a leader and professional.</p>
+      <div class="reflection-card reveal">
+        <p class="reflection-text">
+          <strong>Replace this section</strong> with your overall capstone reflection once the course is underway. What has the LEAD 4000 experience taught you about yourself as a leader? How do the concepts from this course connect to your work as a CS student, Resident Assistant, SAAC VP, and intern? What are you taking into your next chapter?
+          <br><br>
+          This is a great place to tie everything together — your technical work, your leadership roles, and the lessons from this capstone — into a cohesive narrative about who you are and where you're going.
+        </p>
+      </div>
+    </div>
+  </section>-->
+
+  <footer>
+    <span class="footer-logo">GW</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="media.html">Media</a>
+      <a href="lead4000.html">LEAD 4000</a>
+      <a href="resume.html">Resume</a>
+    </div>
+    <span class="footer-text">SKO Buffs 🦬</span>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

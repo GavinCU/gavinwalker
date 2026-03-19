@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+    <!-- Security meta tags -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.instagram.com; img-src 'self' https://img.youtube.com https://i.ytimg.com data: blob:; frame-src https://www.youtube.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self';" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Media — Gavin Walker</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+
+    .page-header {
+      padding: 9rem 3rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header-bg {
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 260px;
+      color: rgba(201,162,39,0.025);
+      top: 50%;
+      right: -20px;
+      transform: translateY(-50%);
+      line-height: 1;
+      pointer-events: none;
+      letter-spacing: -5px;
+    }
+
+    .page-eyebrow {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .page-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--gold-dim); }
+
+    .page-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 7vw, 96px);
+      letter-spacing: 2px;
+      line-height: 0.95;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+    .page-title span { color: var(--gold); }
+
+    .page-sub {
+      font-family: 'Crimson Pro', serif;
+      font-size: 17px;
+      font-style: italic;
+      color: var(--text2);
+      max-width: 520px;
+      line-height: 1.75;
+    }
+
+    .section-eyebrow {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--gold-dim); }
+
+    h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 4vw, 56px);
+      letter-spacing: 2px;
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-intro {
+      font-family: 'Crimson Pro', serif;
+      font-size: 16px;
+      font-style: italic;
+      color: var(--text2);
+      max-width: 560px;
+      margin-bottom: 3rem;
+      line-height: 1.75;
+    }
+
+    .gold-rule {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+      opacity: 0.4;
+    }
+
+    /* STATS BANNER */
+    .media-stats {
+      background: var(--mid);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      padding: 2rem 3rem;
+    }
+
+    .media-stat {
+      padding: 0 2rem;
+      border-right: 1px solid rgba(255,255,255,0.05);
+      text-align: center;
+    }
+    .media-stat:last-child { border-right: none; }
+
+    .media-stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40px;
+      color: var(--gold);
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    .media-stat-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-top: 5px;
+    }
+
+    /* FEATURED VIDEO */
+    .featured-section {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      max-width: 100%;
+      padding: 5rem 0;
+    }
+
+    .featured-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .video-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: var(--mid);
+      border: 1px solid var(--border2);
+      overflow: hidden;
+    }
+
+    .video-wrap iframe,
+    .video-wrap video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      background: var(--mid);
+    }
+
+    .video-placeholder-icon {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 52px;
+      color: var(--gold-dim);
+      letter-spacing: 2px;
+    }
+
+    .video-placeholder-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text3);
+      text-align: center;
+      max-width: 200px;
+      line-height: 1.6;
+    }
+
+    .video-corner {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-color: var(--gold);
+      border-style: solid;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .video-corner.tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+    .video-corner.tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+    .video-corner.bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
+    .video-corner.br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+    .featured-badge {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border: 1px solid var(--border2);
+      color: var(--gold-dim);
+      background: rgba(201,162,39,0.06);
+      margin-bottom: 1rem;
+    }
+
+    .featured-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(28px, 4vw, 48px);
+      letter-spacing: 2px;
+      color: var(--text);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+
+    .featured-desc {
+      font-family: 'Crimson Pro', serif;
+      font-size: 16px;
+      color: var(--text2);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+    .featured-desc strong { color: var(--text); font-weight: 600; }
+
+    .featured-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 1rem;
+      background: var(--mid);
+      border: 1px solid var(--border);
+    }
+
+    .meta-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+
+    .meta-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 15px;
+      letter-spacing: 1px;
+      color: var(--text);
+    }
+
+    /* INSTAGRAM GRID */
+    .content-section {
+      background: var(--darker);
+      border-top: 1px solid var(--border);
+      padding: 5rem 0;
+      max-width: 100%;
+    }
+
+    .content-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .ig-wrap {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .ig-wrap:hover { border-color: var(--border2); }
+
+    .ig-label {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ig-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .ig-label-text {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+
+    .ig-embed-container {
+      padding: 0.5rem;
+      flex: 1;
+      min-height: 420px;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .ig-embed-container .instagram-media {
+      margin: 0 !important;
+      min-width: 100% !important;
+      width: 100% !important;
+    }
+
+    .ig-placeholder {
+      flex: 1;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 2rem;
+    }
+
+    .ig-placeholder-icon {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40px;
+      color: var(--gold-dim);
+      letter-spacing: 2px;
+    }
+
+    .ig-placeholder-text {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text3);
+      text-align: center;
+      line-height: 1.7;
+    }
+
+    /* SOCIAL STATS + REEL LAYOUT */
+    .social-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      align-items: start;
+    }
+
+    /* LEFT — Stats infographic */
+    .stats-infographic {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    /* Big hero stat card — views */
+    .stat-big-card {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-big-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--gold);
+      opacity: 0.7;
+    }
+
+    .stat-big-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 6vw, 72px);
+      color: var(--gold);
+      letter-spacing: 2px;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-big-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 1rem;
+    }
+
+    /* Animated progress bar */
+    .stat-big-bar {
+      width: 100%;
+      height: 3px;
+      background: rgba(255,255,255,0.05);
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+    }
+
+    .stat-big-fill {
+      height: 100%;
+      background: linear-gradient(to right, var(--gold-dim), var(--gold));
+      transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .stat-big-sub {
+      font-family: 'Crimson Pro', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text2);
+    }
+
+    /* Two smaller stat cards side by side */
+    .stat-row-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .stat-mini-card {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .stat-mini-icon {
+      font-size: 18px;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stat-mini-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      color: var(--text);
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    .stat-mini-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+
+    .stat-mini-bar {
+      width: 100%;
+      height: 2px;
+      background: rgba(255,255,255,0.05);
+      margin-top: 0.5rem;
+      overflow: hidden;
+    }
+
+    .stat-mini-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--gold-dim);
+      transition: width 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Platform dots row */
+    .stat-platform-row {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .stat-platform {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+
+    .stat-platform-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* RIGHT — Reel */
+    .reel-wrap {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s;
+    }
+    .reel-wrap:hover { border-color: var(--border2); }
+
+    .reel-thumb-link {
+      display: block;
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 14;
+      text-decoration: none;
+      overflow: hidden;
+      background: var(--darker);
+    }
+
+    .reel-thumb-link img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+    .reel-thumb-link:hover img { transform: scale(1.03); }
+
+    .reel-thumb-placeholder {
+      width: 100%;
+      height: 100%;
+      min-height: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 2rem;
+    }
+
+    .reel-thumb-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: rgba(0,0,0,0.3);
+      transition: background 0.2s;
+    }
+    .reel-thumb-link:hover .reel-thumb-overlay { background: rgba(0,0,0,0.5); }
+
+    .ig-play-btn {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: rgba(201,162,39,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--darker);
+      padding-left: 4px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      transition: transform 0.2s;
+    }
+    .reel-thumb-link:hover .ig-play-btn { transform: scale(1.1); }
+
+    .ig-reel-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .reel-footer {
+      padding: 1rem 1.25rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--darker);
+    }
+
+    .reel-footer-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+
+    .reel-footer-link {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .reel-footer-link:hover { color: var(--gold); }
+
+    /* BRANDS SECTION */
+    .brands-section {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+      padding: 5rem 0;
+      max-width: 100%;
+    }
+
+    .brands-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
+
+    /* 4-column grid for brand cards */
+    .brands-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+
+    .brand-card {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      text-align: center;
+      transition: border-color 0.2s, background 0.2s;
+      min-height: 140px;
+      position: relative;
+      overflow: hidden;
+    }
+    .brand-card:hover { border-color: var(--border2); background: var(--surface); }
+
+    /* Gold sweep on hover */
+    .brand-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+    .brand-card:hover::after { width: 100%; }
+
+    /* Text logo — replace with <img> once you have logo files */
+    .brand-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 2px;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    /* Actual logo image — hidden until you add real logos */
+    .brand-logo-img {
+      max-width: 120px;
+      max-height: 60px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);  /* makes any logo white */
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .brand-card:hover .brand-logo-img { opacity: 1; }
+
+    /* Small category label below the logo */
+    .brand-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links .hide-mobile { display: none; }
+      .page-header { padding: 8rem 1.5rem 3rem; }
+      .featured-inner, .content-inner, .timeline-inner { padding: 0 1.5rem; }
+      .featured-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .ig-grid { grid-template-columns: 1fr; }
+      .social-grid { grid-template-columns: 1fr; }
+      .stat-row-cards { grid-template-columns: 1fr 1fr; }
+      .brands-grid { grid-template-columns: repeat(2, 1fr); }
+      .media-stats { grid-template-columns: repeat(2, 1fr); padding: 2rem 1.5rem; }
+      .brands-inner { padding: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="index.html">GW</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html" class="hide-mobile">Projects</a></li>
+      <li><a href="media.html" class="active">Media</a></li>
+      <li><a href="lead4000.html" class="hide-mobile">LEAD 4000</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-bg">MEDIA</div>
+    <div class="page-eyebrow">Content & Creative Work</div>
+    <h1 class="page-title">Media & <span>Appearances</span></h1>
+    <p class="page-sub">National commercial work, digital content creation, and marketing campaigns produced through my role with the CU Boulder Spirit Squad.</p>
+  </div>
+
+  <div class="gold-rule"></div>
+
+  <!-- FEATURED VIDEO — Nissan Commercial -->
+  <div class="featured-section">
+    <div class="featured-inner">
+      <div class="section-eyebrow reveal">Featured</div>
+      <h2 class="reveal">National Commercial Work</h2>
+      <p class="section-intro reveal">Selected for national brand campaigns through my marketing work with the CU Boulder Spirit Squad.</p>
+
+      <div class="featured-grid">
+
+        <!-- VIDEO EMBED
+             Option A — YouTube: uncomment iframe, replace YOUR_YOUTUBE_VIDEO_ID
+             Option B — Self-hosted MP4: uncomment video tag, set correct path -->
+        <div class="video-wrap reveal">
+          <a href="https://www.youtube.com/watch?v=vG09Gl87bHQ" target="_blank" rel="noopener noreferrer"
+             style="display:block; position:absolute; inset:0; text-decoration:none;">
+            <img
+              src="https://img.youtube.com/vi/vG09Gl87bHQ/maxresdefault.jpg"
+              alt="Nissan Commercial — CU Boulder Spirit Squad"
+              style="width:100%; height:100%; object-fit:cover; display:block;" />
+            <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.25); transition:background 0.2s;"
+                 onmouseenter="this.style.background='rgba(0,0,0,0.4)'"
+                 onmouseleave="this.style.background='rgba(0,0,0,0.25)'">
+              <div style="width:52px; height:52px; background:rgba(201,162,39,0.92); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; color:#050503; padding-left:4px; box-shadow:0 4px 20px rgba(0,0,0,0.5);">▶</div>
+            </div>
+          </a>
+          <div class="video-corner tl"></div>
+          <div class="video-corner tr"></div>
+          <div class="video-corner bl"></div>
+          <div class="video-corner br"></div>
+        </div>
+
+        <div class="featured-text reveal reveal-d1">
+          <div class="featured-badge">Nissan · National Campaign</div>
+          <div class="featured-title">Nissan Commercial Shoot</div>
+          <p class="featured-desc">
+            As part of my marketing work with the CU Boulder Spirit Squad, I was selected to participate in a <strong>national Nissan commercial campaign</strong> representing the university's brand and spirit on a national platform.
+          </p>
+          <p class="featured-desc">
+            The campaign involved a professional shoot where I collaborated with a team of creatives to capture dynamic footage showcasing the energy and enthusiasm of the Spirit Squad. The commercial aired nationally, providing significant exposure for both the university and my work in content creation and marketing.
+          </p>
+          <div class="featured-meta">
+            <div class="meta-row">
+              <span class="meta-label">Client</span>
+              <span class="meta-val">Nissan</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Type</span>
+              <span class="meta-val">National Commercial</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Location</span>
+              <span class="meta-val">Austin, TX</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Role</span>
+              <span class="meta-val">Spirit Squad Marketing</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SOCIAL STATS + REEL -->
+  <div class="content-section">
+    <div class="content-inner">
+      <div class="section-eyebrow reveal">Social Content</div>
+      <h2 class="reveal">Digital Content Creation</h2>
+      <p class="section-intro reveal">Building fan engagement and driving measurable growth for CU Boulder Spirit Squad across social platforms.</p>
+
+      <div class="social-grid">
+
+        <!-- LEFT — Stats infographic -->
+        <div class="stats-infographic reveal">
+
+          <div class="stat-big-card">
+            <div class="stat-big-num" id="views-count">0</div>
+            <div class="stat-big-label">Instagram Views</div>
+            <div class="stat-big-bar">
+              <div class="stat-big-fill" style="width:0%" data-target="92"></div>
+            </div>
+            <div class="stat-big-sub">3.4M+ total views generated</div>
+          </div>
+
+          <div class="stat-row-cards">
+
+            <div class="stat-mini-card">
+              <div class="stat-mini-icon">↑</div>
+              <div class="stat-mini-num" id="followers-count">0%</div>
+              <div class="stat-mini-label">Follower Growth</div>
+              <div class="stat-mini-bar">
+                <div class="stat-mini-fill" data-target="38"></div>
+              </div>
+            </div>
+
+            <div class="stat-mini-card">
+              <div class="stat-mini-icon">♡</div>
+              <div class="stat-mini-num" id="interactions-count">0</div>
+              <div class="stat-mini-label">Interactions</div>
+              <div class="stat-mini-bar">
+                <div class="stat-mini-fill" data-target="72"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="stat-platform-row">
+            <div class="stat-platform">
+              <div class="stat-platform-dot" style="background:#E1306C;"></div>
+              <span>Instagram</span>
+            </div>
+            <div class="stat-platform">
+              <div class="stat-platform-dot" style="background:#000;border:1px solid rgba(255,255,255,0.2);"></div>
+              <span>TikTok</span>
+            </div>
+            <div class="stat-platform">
+              <div class="stat-platform-dot" style="background:#1877F2;"></div>
+              <span>Facebook</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT — Single reel -->
+        <div class="reel-wrap reveal reveal-d1">
+          <div class="ig-label">
+            <div class="ig-dot"></div>
+            <span class="ig-label-text">Spirit Squad · Featured Reel</span>
+          </div>
+
+          <!-- THUMBNAIL INSTRUCTIONS:
+               Since Instagram blocks hotlinking, save a screenshot of your reel
+               and place it in an images/ folder in your repo.
+               Then replace the placeholder div below with:
+               <img src="images/reel-thumb.jpg" alt="Spirit Squad Reel" style="width:100%;height:100%;object-fit:cover;display:block;" />
+          -->
+          <a href="https://www.instagram.com/chipthebuffalo/" target="_blank" rel="noopener noreferrer" class="reel-thumb-link">
+            <div class="reel-thumb-placeholder">
+            </div>
+            <div class="reel-thumb-overlay">
+              <div class="ig-play-btn">▶</div>
+              <div class="ig-reel-label">Watch on Instagram</div>
+            </div>
+          </a>
+
+          <div class="reel-footer">
+            <div class="reel-footer-label">Spirit Squad Content · CU Boulder</div>
+            <a href="https://www.instagram.com/chipthebuffalo/" target="_blank" rel="noopener noreferrer" class="reel-footer-link">View on Instagram →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- BRANDS SECTION -->
+  <div class="brands-section">
+    <div class="brands-inner">
+      <div class="section-eyebrow reveal">Partnerships</div>
+      <h2 class="reveal">Brands I've Worked With</h2>
+      <p class="section-intro reveal">National and university brand partnerships represented through Spirit Squad marketing and commercial work.</p>
+
+      <div class="brands-grid reveal">
+
+        <!-- Each brand card — replace the text logo with an <img> tag once you have the logo files -->
+        <!-- Example: <img src="images/nissan-logo.png" alt="Nissan" class="brand-logo-img" /> -->
+
+        <div class="brand-card">
+          <div class="brand-logo">NISSAN</div>
+          <div class="brand-label">National Commercial</div>
+        </div>
+
+        <div class="brand-card">
+          <div class="brand-logo">TOYOTA</div>
+          <div class="brand-label">CU Boulder Commercial</div>
+        </div>
+
+        <div class="brand-card">
+          <div class="brand-logo">PEPSI</div>
+          <div class="brand-label">Brand Activation</div>
+        </div>
+
+        <div class="brand-card">
+          <div class="brand-logo">URBAN<br>OUTFITTERS</div>
+          <div class="brand-label">Gifting Suite · Photoshoot</div>
+        </div>
+
+        <div class="brand-card">
+          <div class="brand-logo">BIG 12</div>
+          <div class="brand-label">Conference Partnership</div>
+        </div>
+
+        <div class="brand-card">
+          <div class="brand-logo">WWE</div>
+          <div class="brand-label">Big 12 · WWE Partnership</div>
+        </div>
+
+        <div class="brand-card">
+          <div class="brand-logo">BRONCOS</div>
+          <div class="brand-label">Halftime Appearance</div>
+        </div>
+
+        <div class="brand-card">
+          <div class="brand-logo">CU<br>BOULDER</div>
+          <div class="brand-label">University · Spirit Squad</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">GW</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="media.html">Media</a>
+      <a href="lead4000.html">LEAD 4000</a>
+      <a href="resume.html">Resume</a>
+    </div>
+    <span class="footer-text">SKO Buffs 🦬</span>
+  </footer>
+
+  <!-- Click spark canvas -->
+  <canvas id="spark-canvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:99998;"></canvas>
+
+  <script>
+    (function() {
+      const canvas = document.getElementById('spark-canvas');
+      const ctx = canvas.getContext('2d');
+      let sparks = [];
+      const CONFIG = { sparkColor: '#C9A227', sparkSize: 28, sparkRadius: 22, sparkCount: 8, duration: 450, lineWidth: 2 };
+      function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+      resize();
+      window.addEventListener('resize', resize);
+      function easeOut(t) { return t * (2 - t); }
+      window.addEventListener('click', (e) => {
+        const now = performance.now();
+        for (let i = 0; i < CONFIG.sparkCount; i++) {
+          sparks.push({ x: e.clientX, y: e.clientY, angle: (2 * Math.PI * i) / CONFIG.sparkCount, startTime: now });
+        }
+      });
+      (function loop(ts) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        sparks = sparks.filter(s => {
+          const elapsed = ts - s.startTime;
+          if (elapsed >= CONFIG.duration) return false;
+          const progress = elapsed / CONFIG.duration;
+          const eased = easeOut(progress);
+          const dist = eased * CONFIG.sparkRadius;
+          const len = CONFIG.sparkSize * (1 - eased);
+          const alpha = 1 - progress;
+          const x1 = s.x + dist * Math.cos(s.angle);
+          const y1 = s.y + dist * Math.sin(s.angle);
+          const x2 = s.x + (dist + len) * Math.cos(s.angle);
+          const y2 = s.y + (dist + len) * Math.sin(s.angle);
+          ctx.globalAlpha = alpha;
+          ctx.strokeStyle = CONFIG.sparkColor;
+          ctx.lineWidth = CONFIG.lineWidth;
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
+          ctx.stroke();
+          return true;
+        });
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(loop);
+      })(0);
+    })();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+
+          // Animate progress bars when they come into view
+          e.target.querySelectorAll('.stat-big-fill, .stat-mini-fill').forEach(bar => {
+            bar.style.width = bar.dataset.target + '%';
+          });
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Counter animation for the stat numbers
+    function animateCounter(el, target, suffix, decimals) {
+      const duration = 1800;
+      const start = performance.now();
+      function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const val = eased * target;
+        el.textContent = decimals
+          ? val.toFixed(1) + suffix
+          : Math.floor(val).toLocaleString() + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    // Trigger counters when the infographic scrolls into view
+    const infographic = document.querySelector('.stats-infographic');
+    if (infographic) {
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            animateCounter(document.getElementById('views-count'), 3.4, 'M+', true);
+            animateCounter(document.getElementById('followers-count'), 38, '%', false);
+            animateCounter(document.getElementById('interactions-count'), 200, 'K+', false);
+            counterObserver.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+      counterObserver.observe(infographic);
+    }
+
+    // ── EMAIL OBFUSCATION ──
+    // Email is never written as plain text in the HTML.
+    // Built at runtime from parts so scrapers can't harvest it.
+    (function() {
+      const u = 'Gavin.walker';
+      const d = 'colorado.edu';
+      const email = u + '@' + d;
+      const links = document.querySelectorAll('#email-link');
+      links.forEach(function(el) {
+        el.href = 'mailto:' + email;
+        el.onclick = null;
+      });
+      const displays = document.querySelectorAll('#email-display');
+      displays.forEach(function(el) {
+        el.textContent = email;
+      });
+    })();
+  </script>
+</body>
+</html>

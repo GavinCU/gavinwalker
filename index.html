@@ -1,1 +1,1884 @@
-<!DOCTYPE html><html><head><title>Gavin Walker</title></head><body><h1>Coming soon!</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+    <!-- Security meta tags -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.instagram.com; img-src 'self' https://img.youtube.com https://i.ytimg.com data: blob:; frame-src https://www.youtube.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self';" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gavin Walker — Portfolio</title>
+
+ 
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+
+    .hero {
+      min-height: 100vh;          /* full screen height */
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* 50/50 split */
+      overflow: hidden;
+    }
+
+    /* Left panel — holds the name, tagline, and CTA buttons */
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end; /* pushes content to the bottom */
+      padding: 9rem 3.5rem 5rem;
+      position: relative;        /* needed for absolute children (aurora, bg letter) */
+      overflow: hidden;
+    }
+
+    /* Subtle gold radial glow in the bottom-left of the hero */
+    .hero-left::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 20% 80%, rgba(201,162,39,0.07) 0%, transparent 60%);
+    }
+
+    /* Giant watermark "G" behind the content — purely decorative */
+    .hero-bg-letter {
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 420px;
+      color: rgba(201,162,39,0.025); /* almost invisible gold */
+      bottom: -60px;
+      left: -20px;
+      line-height: 1;
+      pointer-events: none; /* don't block clicks */
+    }
+
+    /* Sits above the aurora canvas and bg letter */
+    .hero-content { position: relative; z-index: 2; }
+
+    /* Small gold label above the name — fades up on page load */
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      opacity: 0; /* starts invisible — animation fills it in */
+      animation: fadeUp 0.8s ease forwards 0.3s; /* 0.3s delay */
+    }
+    /* Short horizontal line before the eyebrow text */
+    .eyebrow-line { width: 28px; height: 1px; background: var(--gold-dim); }
+
+    /* Main name heading — huge Bebas Neue, fades up after eyebrow */
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(68px, 8.5vw, 108px); /* responsive: min 68px, max 108px */
+      line-height: 0.92;  /* tighter than normal for display type */
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.5s; /* 0.5s delay */
+    }
+    /* "Walker" — solid gold fill */
+    h1 .name-gold { color: var(--gold); display: block; }
+    /* "Gavin" — transparent with a white outline stroke */
+    h1 .name-outline {
+      color: transparent;
+      -webkit-text-stroke: 2px rgba(232,224,208,0.6);
+      display: block;
+    }
+
+    /* Italic serif tagline below the name */
+    .hero-sub {
+      font-family: 'Crimson Pro', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--text2);
+      max-width: 420px;
+      line-height: 1.75;
+      margin-bottom: 0.75rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.7s; /* 0.7s delay */
+    }
+    .hero-sub strong { color: var(--text); font-style: normal; font-weight: 600; }
+
+    /* ── TYPED TEXT ──
+       The rotating phrases that type and delete themselves.
+       Sits between the tagline and the CTA buttons. */
+    .typed-line {
+      font-family: 'Bebas Neue', monospace;
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      min-height: 20px; /* prevents layout shift when text is empty */
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.8s;
+    }
+    /* Blinking | cursor after the typed text */
+    .typed-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 14px;
+      background: var(--gold);
+      margin-left: 2px;
+      vertical-align: middle;
+      animation: blink 0.8s step-end infinite; /* hard on/off, no fade */
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* Row of CTA buttons — fades in last */
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap; /* stacks on narrow screens */
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.9s;
+    }
+
+    /* Ghost text link (underline only, no background) */
+    .btn-ghost-light {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text2);
+      text-decoration: none;
+      border-bottom: 1px solid var(--text3);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost-light:hover { color: var(--gold); border-color: var(--gold); }
+
+    /* ── HERO RIGHT PANEL ──
+       Dark panel with the photo card + info rows */
+    .hero-right {
+      background: var(--mid);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 9rem 3.5rem 5rem;
+      position: relative;
+      overflow: hidden;
+      gap: 1.5rem;
+    }
+
+    /* Decorative "CU" watermark in the bottom-right of the panel */
+    .hero-right::before {
+      content: 'CU';
+      position: absolute;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 320px;
+      color: rgba(201,162,39,0.025);
+      bottom: -40px;
+      right: -20px;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    /* Stack of key-value info rows (University, Degree, etc.) */
+    .info-stack {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 2px; /* thin gap between rows */
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Individual info row — label on left, value on right */
+    .info-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 1.25rem;
+      background: var(--darker);
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .info-row:hover { border-color: var(--border2); } /* gold border on hover */
+
+    /* Tiny uppercase label (e.g. "UNIVERSITY") */
+    .info-label {
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+
+    /* The actual value (e.g. "CU Boulder") in Bebas Neue */
+    .info-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 17px;
+      letter-spacing: 1.5px;
+      color: var(--text);
+    }
+    .info-val-gold { color: var(--gold); } /* special gold variant */
+
+    /* "Open to opportunities" pill at the bottom of the right panel */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      position: relative;
+      z-index: 2;
+      align-self: flex-start;
+    }
+
+    /* Pulsing green/gold dot next to status text */
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    /* Pulse: fades and shrinks at 50%, returns at 100% */
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+
+    /* ============================================================
+       HAMBURGER MENU (mobile only — hidden on desktop via media query)
+       Three horizontal bars that animate into an X when open.
+       ============================================================ */
+    .hamburger {
+      display: none; /* shown only on mobile */
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+      z-index: 300; /* above everything including the mobile overlay */
+    }
+    /* Each bar of the hamburger icon */
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text2);
+      transition: all 0.3s ease;
+    }
+    /* When .open is added: top bar rotates to form top of X */
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--gold); }
+    /* Middle bar disappears */
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    /* Bottom bar rotates to form bottom of X */
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--gold); }
+
+    /* Full-screen mobile nav overlay — hidden until .open is added */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5,5,3,0.97); /* near-black with slight warmth */
+      z-index: 250;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .mobile-menu.open { display: flex; } /* JS toggles this class */
+
+    /* Big Bebas Neue nav links inside the mobile overlay */
+    .mobile-menu a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      letter-spacing: 3px;
+      color: var(--text2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-menu a.nav-cta { color: var(--gold); } /* Contact link is always gold */
+
+    /* ============================================================
+       STATS STRIP
+       Five key numbers displayed horizontally below the hero.
+       ============================================================ */
+    .stats-strip {
+      background: var(--mid);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr); /* 5 equal columns */
+      padding: 2rem 3rem;
+    }
+
+    .stat-item {
+      padding: 0 1.5rem;
+      border-right: 1px solid rgba(255,255,255,0.05); /* faint divider */
+      text-align: center;
+    }
+    .stat-item:last-child { border-right: none; } /* no divider after last item */
+
+    /* The big number (e.g. "2027", "5") */
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40px;
+      color: var(--gold);
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    /* Small label below the number (e.g. "GRAD YEAR") */
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-top: 5px;
+    }
+
+    /* ============================================================
+       CURRENTLY WORKING ON STRIP
+       A horizontal bar showing active projects/work in real time.
+       Update these cards whenever you start something new!
+       ============================================================ */
+    .current-section {
+      background: var(--darker);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      max-width: 100%;
+      padding: 0;
+    }
+
+    /* Inner container: label | card | card */
+    .current-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 3rem;
+      display: grid;
+      grid-template-columns: auto 1fr 1fr; /* label auto-sizes, cards share remaining space */
+      gap: 3rem;
+      align-items: center;
+    }
+
+    /* "Currently working on" label with live dot */
+    .current-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text3);
+      white-space: nowrap; /* prevents wrapping */
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Green pulsing dot — signals this content is live/active */
+    .live-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #3a7d44; /* green */
+      animation: pulse 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    /* Individual "currently working on" card */
+    .current-card {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .current-card:hover { border-color: var(--border2); }
+
+    /* Gold left-border accent on each card */
+    .current-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--gold);
+      opacity: 0.6;
+    }
+
+    /* Small tag above the card title (e.g. "Book · In Progress") */
+    .current-card-tag {
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+    }
+
+    /* Card title in Bebas Neue */
+    .current-card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 1.5px;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    /* Short italic description below the title */
+    .current-card-sub {
+      font-family: 'Crimson Pro', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text2);
+    }
+
+    /* ============================================================
+       ABOUT SECTION
+       Two-column: bio text on left, key facts sidebar on right.
+       ============================================================ */
+    .about-section { background: var(--dark); border-top: 1px solid var(--border); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr; /* bio gets more space than sidebar */
+      gap: 5rem;
+      align-items: start;
+    }
+
+    /* Main bio text in Crimson Pro serif */
+    .about-body {
+      font-family: 'Crimson Pro', serif;
+      font-size: 17px;
+      color: var(--text2);
+      line-height: 1.9;
+    }
+    .about-body p + p { margin-top: 1rem; } /* space between paragraphs */
+    .about-body strong { color: var(--text); font-weight: 600; }
+
+    /* Pull quote with gold left border */
+    .pull-quote {
+      border-left: 3px solid var(--gold);
+      padding: 1.25rem 1.5rem;
+      background: rgba(201,162,39,0.04); /* very faint gold tint */
+      margin: 2rem 0;
+    }
+    .pull-quote p {
+      font-family: 'Crimson Pro', serif;
+      font-size: 19px;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Sidebar of key facts (University, Major, Roles, etc.) */
+    .about-aside { display: flex; flex-direction: column; gap: 2px; }
+
+    /* Each fact row in the sidebar */
+    .aside-item {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      transition: border-color 0.2s;
+    }
+    .aside-item:hover { border-color: var(--border2); }
+
+    /* Small uppercase label (e.g. "UNIVERSITY") */
+    .aside-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+
+    /* The value (e.g. "University of Colorado Boulder") */
+    .aside-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 17px;
+      letter-spacing: 1px;
+      color: var(--text);
+    }
+
+    /* ============================================================
+       PROJECTS PREVIEW
+       Three featured project cards linking to the full projects page.
+       ============================================================ */
+    .projects-preview { background: var(--darker); border-top: 1px solid var(--border); }
+
+    /* 3-column grid for preview cards */
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-bottom: 2rem;
+    }
+
+    /* Individual project preview card */
+    .preview-card {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: border-color 0.25s;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .preview-card:hover { border-color: var(--border2); }
+
+    /* Gold underline that sweeps in from left on hover */
+    .preview-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;       /* starts at 0 width */
+      background: var(--gold);
+      transition: width 0.3s;      /* animates to 100% on hover */
+    }
+    .preview-card:hover::after { width: 100%; }
+
+    /* Ghost number in the top-right corner of each card (01, 02, 03) */
+    .preview-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 52px;
+      color: rgba(201,162,39,0.07); /* barely visible */
+      line-height: 1;
+      position: absolute;
+      top: 1rem; right: 1rem;
+    }
+
+    /* Small gold badge (e.g. "FRONT-END DEV") */
+    .preview-badge {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border: 1px solid var(--border2);
+      color: var(--gold-dim);
+      background: rgba(201,162,39,0.06);
+      display: inline-block;
+      width: fit-content;
+    }
+
+    /* Project title in Bebas Neue */
+    .preview-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 1px;
+      color: var(--text);
+      line-height: 1.1;
+    }
+
+    /* Short project description in serif */
+    .preview-desc {
+      font-family: 'Crimson Pro', serif;
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.7;
+    }
+
+    /* Tech stack tags at the bottom of each card */
+    .preview-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 0.75rem; }
+
+    /* Centered "View All Projects" button below the grid */
+    .preview-cta { display: flex; justify-content: center; padding-top: 1rem; }
+
+    /* ============================================================
+       WRITING / ESSAYS SECTION
+       List of essays and reports with hover indent effect.
+       ============================================================ */
+    .writing-section { background: var(--mid); border-top: 1px solid var(--border); }
+    .writing-list { display: flex; flex-direction: column; }
+
+    /* Each essay row: number | title+course | arrow */
+    .writing-row {
+      display: grid;
+      grid-template-columns: 60px 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      text-decoration: none;
+      transition: padding 0.2s, background 0.2s;
+    }
+    .writing-row:first-child { border-top: 1px solid rgba(255,255,255,0.05); }
+    /* On hover: add horizontal padding to create indent effect */
+    .writing-row:hover { padding-left: 1rem; padding-right: 1rem; background: rgba(201,162,39,0.03); }
+
+    /* Ghost row number on the left (01, 02, 03) */
+    .writing-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: rgba(201,162,39,0.12);
+      text-align: right;
+      line-height: 1;
+    }
+
+    /* Essay title */
+    .writing-title {
+      font-family: 'Crimson Pro', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    /* Course and semester label below the title */
+    .writing-course {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+    }
+
+    /* Arrow on the right — slides right and turns gold on hover */
+    .writing-arrow { font-size: 16px; color: var(--text3); transition: color 0.2s, transform 0.2s; }
+    .writing-row:hover .writing-arrow { color: var(--gold); transform: translateX(4px); }
+
+    .media-preview-section { background: var(--mid); border-top: 1px solid var(--border); }
+
+    /* ============================================================
+       FIND ME SECTION
+       Three external link cards.
+       ============================================================ */
+    .findme-section { background: var(--darker); border-top: 1px solid var(--border); }
+
+    .findme-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .findme-card {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: border-color 0.25s, transform 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .findme-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+
+    .findme-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+    .findme-card:hover::after { width: 100%; }
+
+    .findme-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .findme-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: var(--gold);
+      background: rgba(201,162,39,0.08);
+      border: 1px solid var(--border2);
+      padding: 3px 10px;
+    }
+
+    .findme-external {
+      font-size: 18px;
+      color: var(--text3);
+      transition: color 0.2s, transform 0.2s;
+    }
+    .findme-card:hover .findme-external { color: var(--gold); transform: translate(2px, -2px); }
+
+    .findme-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 1.5px;
+      color: var(--text);
+      line-height: 1.1;
+    }
+
+    .findme-desc {
+      font-family: 'Crimson Pro', serif;
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    .findme-url {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: var(--text3);
+      margin-top: auto;
+    }
+
+    .media-preview-section { background: var(--mid); border-top: 1px solid var(--border); }
+
+    /* ============================================================
+       CONTACT SECTION
+       Simple set of contact links — no form (removed for security).
+       ============================================================ */
+    .contact-section { background: var(--dark); border-top: 1px solid var(--border); }
+
+    /* Vertical stack of contact link rows */
+    .contact-links { display: flex; flex-direction: column; gap: 2px; max-width: 560px; }
+
+    /* Individual contact link row (Email, GitHub, LinkedIn) */
+    .c-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      background: var(--mid);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: border-color 0.2s;
+    }
+    .c-link:hover { border-color: var(--border2); }
+
+    /* Small label above the value (e.g. "EMAIL") */
+    .c-link-label { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text3); margin-bottom: 3px; }
+    /* The actual contact value (e.g. "gavin@example.com") */
+    .c-link-val { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 1px; color: var(--text); }
+    /* Arrow that slides right and turns gold on hover */
+    .c-link-arrow { color: var(--text3); font-size: 15px; transition: color 0.2s, transform 0.2s; }
+    .c-link:hover .c-link-arrow { color: var(--gold); transform: translateX(4px); }
+
+    /* ============================================================
+       INTRO TEXT (contact section)
+       ============================================================ */
+    .contact-intro {
+      font-family: 'Crimson Pro', serif;
+      font-size: 17px;
+      font-style: italic;
+      color: var(--text2);
+      line-height: 1.85;
+      margin-bottom: 2rem;
+      max-width: 560px;
+    }
+
+    /* ============================================================
+       DECRYPT TEXT EFFECT
+       Each letter in the name gets wrapped in a .decrypt-char span.
+       On hover: letters scramble then reveal left-to-right.
+       ============================================================ */
+    .decrypt-char {
+      display: inline-block;
+      transition: color 0.1s;
+    }
+    /* Scrambled state — dimmed and semi-transparent */
+    .decrypt-char.encrypted {
+      color: var(--gold-dim);
+      opacity: 0.5;
+    }
+    /* "Gavin" uses the outline style, so encrypted chars use a muted white */
+    #decrypt-first .decrypt-char.encrypted {
+      color: rgba(232,224,208,0.25);
+    }
+
+    /* ============================================================
+       AURORA WEBGL CANVAS
+       Sits behind all hero content as an animated background.
+       pointer-events: none so it doesn't block clicks.
+       ============================================================ */
+    #aurora-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;          /* behind hero-content (z-index: 2) */
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
+    /* ============================================================
+       BACK TO TOP BUTTON
+       Fixed to the bottom-right, hidden until user scrolls 400px.
+       Uses the same angled clip-path as the gold buttons.
+       ============================================================ */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 44px;
+      height: 44px;
+      background: var(--mid);
+      border: 1px solid var(--border2);
+      color: var(--gold);
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 100;
+      opacity: 0;                           /* hidden by default */
+      transform: translateY(12px);          /* slightly below final position */
+      transition: opacity 0.3s, transform 0.3s, border-color 0.2s, background 0.2s;
+      text-decoration: none;
+      clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%); /* angled corners */
+    }
+    /* .visible class added by JS after scrolling 400px */
+    .back-to-top.visible { opacity: 1; transform: translateY(0); }
+    /* Full gold fill on hover */
+    .back-to-top:hover { background: var(--gold); color: var(--darker); border-color: var(--gold); }
+
+    /* ============================================================
+       SCROLL PROGRESS BAR
+       Thin gold line at the very top of the viewport.
+       Width is set by JS as a percentage of scroll progress.
+       ============================================================ */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      background: var(--gold);
+      z-index: 9999; /* above everything */
+      width: 0%;     /* JS updates this */
+      transition: width 0.1s linear;
+    }
+
+    /* ============================================================
+       FADE UP ANIMATION
+       Used by hero elements on page load.
+       Elements start invisible and 24px below, animate to visible.
+       ============================================================ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       RESPONSIVE — MOBILE (under 900px)
+       Collapses grid layouts to single column.
+       Hides the hero right panel entirely.
+       Shows the hamburger menu instead of nav links.
+       ============================================================ */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }       /* single column */
+      .hero-right { display: none; }              /* hide photo panel on mobile */
+      .hero-left { padding: 7rem 2rem 4rem; min-height: 100vh; }
+      .stats-strip { grid-template-columns: repeat(3, 1fr); padding: 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .preview-grid { grid-template-columns: 1fr; }
+      .findme-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .current-inner { grid-template-columns: 1fr; gap: 1rem; }
+      .current-label { display: none; }           /* hide "Currently working on" label */
+      .nav-links .hide-mobile { display: none; }  /* hide Projects + LEAD 4000 nav links */
+      .hamburger { display: flex; }               /* show hamburger button */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       SCROLL PROGRESS BAR
+       Empty div — width is controlled entirely by JS.
+       ============================================================ -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ============================================================
+       BACK TO TOP BUTTON
+       Hidden until user scrolls down 400px — JS adds .visible class.
+       ============================================================ -->
+  <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top">↑</a>
+
+  <!-- ============================================================
+       MOBILE FULL-SCREEN MENU
+       Hidden by default. JS adds .open to show it.
+       Each link calls closeMobileMenu() to dismiss after navigation.
+       ============================================================ -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" onclick="closeMobileMenu()">Home</a>
+    <a href="projects.html" onclick="closeMobileMenu()">Projects</a>
+    <a href="media.html" onclick="closeMobileMenu()">Media</a>
+    <a href="lead4000.html" onclick="closeMobileMenu()">LEAD 4000</a>
+    <a href="resume.html" onclick="closeMobileMenu()">Resume</a>
+    <a href="index.html#contact" class="nav-cta" onclick="closeMobileMenu()">Contact</a>
+  </div>
+
+  <!-- ============================================================
+       NAV BAR
+       Fixed at top. Logo on left, links in middle, CTA on right.
+       Hamburger button replaces links on mobile.
+       ============================================================ -->
+  <nav>
+    <a class="nav-logo" href="index.html">GW</a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="projects.html" class="hide-mobile">Projects</a></li>
+      <li><a href="media.html">Media</a></li>  <!-- hidden on mobile -->
+      <li><a href="lead4000.html" class="hide-mobile">LEAD 4000</a></li> <!-- hidden on mobile -->
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+    </ul>
+    <!-- Three-bar button — animates to X when mobile menu is open -->
+    <button class="hamburger" id="hamburger" aria-label="Menu" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ============================================================
+       HERO SECTION
+       Left: aurora canvas + name + tagline + typed text + buttons
+       Right: tilt card photo + info rows + status bar
+       ============================================================ -->
+  <div class="hero">
+
+    <!-- LEFT PANEL -->
+    <div class="hero-left">
+
+      <!-- Aurora WebGL canvas — rendered behind all content -->
+      <canvas id="aurora-canvas"></canvas>
+
+      <!-- Giant decorative "G" watermark — purely visual -->
+      <div class="hero-bg-letter">G</div>
+
+      <div class="hero-content">
+
+        <!-- Small gold label above the name -->
+        <div class="hero-eyebrow">
+          <span class="eyebrow-line"></span>
+          Computer Science · CU Boulder · Class of 2027
+        </div>
+
+        <!-- Name — each word gets the decrypt-on-hover effect via JS -->
+        <h1>
+          <span class="name-outline" id="decrypt-first">Gavin</span>
+          <span class="name-gold" id="decrypt-last">Walker</span>
+        </h1>
+
+        <!-- Italic tagline -->
+        <p class="hero-sub">
+          CS student at <strong>University of Colorado Boulder</strong> building things that matter.
+        </p>
+
+        <!-- Typed text — JS cycles through phrases and types/deletes them -->
+        <div class="typed-line">
+          <span id="typedText"></span><span class="typed-cursor"></span>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="hero-actions">
+          <a href="projects.html" class="btn-gold">View Projects</a>
+          <!-- Outline variant of the gold button for Resume -->
+          <a href="resume.html" class="btn-gold" style="background:transparent;color:var(--gold);border:1px solid var(--border2);clip-path:none;padding:12px 28px;">Resume</a>
+          <a href="#contact" class="btn-ghost-light">Say Hello</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="hero-right">
+
+      <!-- ── TILT CARD ──
+           3D perspective card that rotates to follow the mouse.
+           Contains the headshot photo (or GW fallback if not found).
+           Shine and foil overlays are updated by JS on mousemove. -->
+      <div style="perspective:800px;width:200px;height:240px;flex-shrink:0;" id="tiltWrap">
+        <div id="tiltCard" style="width:100%;height:100%;position:relative;transform-style:preserve-3d;border-radius:12px;border:1px solid rgba(201,162,39,0.2);box-shadow:0 20px 60px rgba(0,0,0,0.6);cursor:pointer;overflow:hidden;background:#0e0e0a;">
+
+          <!-- Headshot photo — onerror shows the GW fallback below -->
+          <img src="images/gwheadshot.jpg" alt="Gavin Walker" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none';document.getElementById('photoFallback').style.display='flex';" />
+
+          <!-- Fallback shown if gwheadshot.jpg is missing -->
+          <div id="photoFallback" style="display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:8px;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:64px;color:rgba(201,162,39,0.15);letter-spacing:4px;line-height:1;">GW</div>
+            <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(201,162,39,0.3);">Add Your Photo</div>
+          </div>
+
+          <!-- Shine overlay: radial gradient that follows cursor position -->
+          <div id="tiltShine" style="position:absolute;inset:0;pointer-events:none;border-radius:12px;opacity:0;transition:opacity 0.15s;mix-blend-mode:screen;"></div>
+
+          <!-- Gold foil overlay: diagonal gradient that shifts with tilt angle -->
+          <div id="tiltFoil" style="position:absolute;inset:0;pointer-events:none;border-radius:12px;opacity:0;transition:opacity 0.2s;"></div>
+
+          <!-- Name label at the bottom of the card -->
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:1rem 1.25rem;background:linear-gradient(to top,rgba(5,5,3,0.95) 60%,transparent);border-radius:0 0 12px 12px;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#E8E0D0;line-height:1;">Gavin Walker</div>
+            <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#C9A227;margin-top:3px;">CS · CU Boulder · 2027</div>
+          </div>
+
+          <!-- Gold corner brackets (decorative) -->
+          <div style="position:absolute;top:10px;left:10px;width:14px;height:14px;border-top:2px solid rgba(201,162,39,0.5);border-left:2px solid rgba(201,162,39,0.5);pointer-events:none;"></div>
+          <div style="position:absolute;top:10px;right:10px;width:14px;height:14px;border-top:2px solid rgba(201,162,39,0.5);border-right:2px solid rgba(201,162,39,0.5);pointer-events:none;"></div>
+          <div style="position:absolute;bottom:10px;left:10px;width:14px;height:14px;border-bottom:2px solid rgba(201,162,39,0.5);border-left:2px solid rgba(201,162,39,0.5);pointer-events:none;"></div>
+          <div style="position:absolute;bottom:10px;right:10px;width:14px;height:14px;border-bottom:2px solid rgba(201,162,39,0.5);border-right:2px solid rgba(201,162,39,0.5);pointer-events:none;"></div>
+        </div>
+      </div>
+
+      <!-- Key-value info rows stacked below the card -->
+      <div class="info-stack">
+        <div class="info-row"><span class="info-label">University</span><span class="info-val info-val-gold">CU Boulder</span></div>
+        <div class="info-row"><span class="info-label">Degree</span><span class="info-val">B.S. Computer Science</span></div>
+        <div class="info-row"><span class="info-label">Minor</span><span class="info-val">Leadership Studies</span></div>
+        <div class="info-row"><span class="info-label">Graduation</span><span class="info-val">May 2027</span></div>
+        <div class="info-row"><span class="info-label">GitHub</span><span class="info-val">GavinCU</span></div>
+        <div class="info-row"><span class="info-label">Based In</span><span class="info-val">Boulder, CO</span></div>
+      </div>
+
+      <!-- Pulsing status indicator -->
+      <div class="status-bar">
+        <div class="status-dot"></div>
+        Open to Summer 2026 Internships
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================================
+       STATS STRIP
+       Five quick numbers shown horizontally below the hero.
+       Update these as your numbers change!
+       ============================================================ -->
+  <div class="stats-strip">
+    <div class="stat-item"><div class="stat-num">CS</div><div class="stat-label">Major</div></div>
+    <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">Projects</div></div>
+    <div class="stat-item"><div class="stat-num">2027</div><div class="stat-label">Grad Year</div></div>
+    <div class="stat-item"><div class="stat-num">4+</div><div class="stat-label">Roles</div></div>
+    <div class="stat-item"><div class="stat-num">SKO</div><div class="stat-label">BUFFS 🦬</div></div>
+  </div>
+
+  <!-- ============================================================
+       CURRENTLY WORKING ON
+       Keep this updated! Two cards showing active work.
+       - Right card: LEAD 4000 capstone
+       ============================================================ -->
+  <div class="current-section">
+    <div class="current-inner">
+      <div class="current-label">
+        <div class="live-dot"></div>
+        Currently working on
+      </div>
+      <!-- Book card — update status/sub as the book progresses -->
+      <div class="current-card reveal">
+        <div class="current-card-tag">Book · In Progress</div>
+        <div class="current-card-title">TBD</div>
+        <div class="current-card-sub">A self-help book about identity, growth, and showing up.</div>
+      </div>
+      <!-- Academic card — update each semester -->
+      <div class="current-card reveal reveal-d1">
+        <div class="current-card-tag">Academic · Spring 2026</div>
+        <div class="current-card-title">LEAD 4000 Capstone</div>
+        <div class="current-card-sub">Leadership capstone integrating theory, practice, and personal development.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       ABOUT SECTION
+       Bio text + pull quote on left, key facts sidebar on right.
+       ============================================================ -->
+  <section class="about-section" id="about">
+    <div class="section">
+      <div class="section-eyebrow reveal">About</div>
+      <h2 class="reveal">Who I Am</h2>
+      <p class="section-intro reveal">A little background on me, my studies, and what drives me.</p>
+      <div class="about-grid">
+        <div class="reveal">
+          <div class="about-body">
+            <p>Hi! I'm Gavin, a <strong>Computer Science student at the University of Colorado Boulder</strong> with a minor in Leadership Studies. I thrive at the intersection of technical problem-solving and real-world impact.</p>
+            <div class="pull-quote">
+              <p>"I am not a product of my circumstances. I am a product of my decisions."- Stephen Covey</p>
+            </div>
+            <p>My work spans software engineering, data structures, algorithms, and full-stack development. Outside the classroom I serve as a <strong>Resident Assistant</strong>, <strong>VP of Internal for SAAC</strong>, and intern with CU Athletics. Managing it all comes down to one thing: building good systems and sticking to them.</p>
+      
+          </div>
+          <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
+            <a href="projects.html" class="btn-gold">View Projects</a>
+            <a href="resume.html" class="btn-outline">See Resume</a>
+          </div>
+        </div>
+        <!-- Key facts sidebar — update these to match your actual info -->
+        <div class="about-aside reveal reveal-d1">
+          <div class="aside-item"><span class="aside-label">University</span><span class="aside-val">University of Colorado Boulder</span></div>
+          <div class="aside-item"><span class="aside-label">Major / Minor</span><span class="aside-val">Computer Science + Leadership Studies</span></div>
+          <div class="aside-item"><span class="aside-label">Current Roles</span><span class="aside-val">RA · SAAC VP · Athletics Intern</span></div>
+          <div class="aside-item"><span class="aside-label">Interests</span><span class="aside-val">Media Creation · Algorithms · UX</span></div>
+          <div class="aside-item"><span class="aside-label">Availability</span><span class="aside-val" style="color:var(--gold);">Summer 2026</span></div>
+          <!-- Link to the LEAD 4000 page -->
+          <div class="aside-item" style="border-color:var(--border2);"><span class="aside-label">Capstone Course</span><span class="aside-val"><a href="lead4000.html" style="color:var(--gold);text-decoration:none;">LEAD 4000 →</a></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJECTS PREVIEW
+       Three featured cards — links to full projects page.
+       Update hrefs to point to specific project anchors.
+       ============================================================ -->
+  <section class="projects-preview" id="projects">
+    <div class="section">
+      <div class="section-eyebrow reveal">Projects</div>
+      <h2 class="reveal">Selected Work</h2>
+      <p class="section-intro reveal">A few highlights — see all projects on the projects page.</p>
+      <div class="preview-grid">
+        <a href="projects.html#portfolio" class="preview-card reveal">
+          <div class="preview-num">01</div>
+          <div class="preview-badge">Front-End Dev</div>
+          <div class="preview-title">Personal Portfolio Website</div>
+          <p class="preview-desc">Built this site from scratch using HTML, CSS, and JavaScript with responsive design and custom layout.</p>
+          <div class="preview-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+        </a>
+        <a href="projects.html#plantblog" class="preview-card reveal reveal-d1">
+          <div class="preview-num">02</div>
+          <div class="preview-badge">Full-Stack · Course Project</div>
+          <div class="preview-title">Plant Community Blog</div>
+          <p class="preview-desc">A web-based blogging platform where users share plants, care tips, and interact with each other's posts.</p>
+          <div class="preview-tags"><span class="tag">HTML</span><span class="tag">JavaScript</span><span class="tag">Database</span></div>
+        </a>
+        <a href="projects.html#nutrislice" class="preview-card reveal reveal-d2">
+          <div class="preview-num">03</div>
+          <div class="preview-badge">UX Design</div>
+          <div class="preview-title">Nutrislice App Redesign</div>
+          <p class="preview-desc">Redesigned the Nutrislice mobile app interface using Figma and UX research to improve usability.</p>
+          <div class="preview-tags"><span class="tag">Figma</span><span class="tag">UX Research</span><span class="tag">Prototyping</span></div>
+        </a>
+      </div>
+      <div class="preview-cta" style="gap:1rem;">
+        <a href="projects.html" class="btn-gold">View All Projects</a>
+        <a href="media.html" class="btn-outline">View Media Work</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FIND ME SECTION
+       Links out to external profiles and features.
+       ============================================================ -->
+  <section class="findme-section" id="findme">
+    <div class="section">
+      <div class="section-eyebrow reveal">Around the Web</div>
+      <h2 class="reveal">Find Me Online</h2>
+      <p class="section-intro reveal">Featured profiles, athlete highlights, and scholarship recognition across the web.</p>
+
+      <div class="findme-grid reveal">
+
+        <a href="https://www.colorado.edu/plc/current-students/meet-our-students/2023" target="_blank" rel="noopener noreferrer" class="findme-card">
+          <div class="findme-card-top">
+            <div class="findme-logo">CU</div>
+            <div class="findme-external">↗</div>
+          </div>
+          <div class="findme-title">CU Boulder PLC</div>
+          <div class="findme-desc">Featured as a current student in the Professional Leadership Certificate program at the University of Colorado Boulder.</div>
+          <div class="findme-url">colorado.edu</div>
+        </a>
+
+        <a href="https://cubuffs.com/sports/2008/8/18/SAAC" target="_blank" rel="noopener noreferrer" class="findme-card">
+          <div class="findme-card-top">
+            <div class="findme-logo">BUFF</div>
+            <div class="findme-external">↗</div>
+          </div>
+          <div class="findme-title">CU Buffs · SAAC</div>
+          <div class="findme-desc">Listed on the official CU Buffs athletics page for the Student-Athlete Advisory Committee where I serve as VP of Internal.</div>
+          <div class="findme-url">cubuffs.com</div>
+        </a>
+
+        <a href="https://www.thecehfoundation.org/featured-scholars" target="_blank" rel="noopener noreferrer" class="findme-card">
+          <div class="findme-card-top">
+            <div class="findme-logo">CEH</div>
+            <div class="findme-external">↗</div>
+          </div>
+          <div class="findme-title">CEH Foundation Scholar</div>
+          <div class="findme-desc">Recognized as a featured scholar by the CEH Foundation highlighting academic achievement and leadership at CU Boulder.</div>
+          <div class="findme-url">thecehfoundation.org</div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MEDIA PREVIEW SECTION
+       Three cards matching the projects preview style.
+       ============================================================ -->
+  <section class="media-preview-section" id="media-preview">
+    <div class="section">
+      <div class="section-eyebrow reveal">Media</div>
+      <h2 class="reveal">Content & Appearances</h2>
+      <p class="section-intro reveal">National commercials, digital content, and brand partnerships through CU Boulder Spirit Squad.</p>
+
+      <div class="preview-grid" style="margin-bottom:2rem;">
+
+        <a href="https://www.youtube.com/watch?v=vG09Gl87bHQ" target="_blank" rel="noopener noreferrer" class="preview-card reveal">
+          <div class="preview-num">01</div>
+          <div class="preview-badge">Nissan · National Campaign</div>
+          <div class="preview-title">National Commercial Work</div>
+          <p class="preview-desc">Selected for a national Nissan commercial through CU Boulder Spirit Squad marketing — representing the university on a national platform.</p>
+          <div class="preview-tags">
+            <span class="tag">Commercial</span>
+            <span class="tag">Spirit Squad</span>
+            <span class="tag tag-gold">Watch on YouTube →</span>
+          </div>
+        </a>
+
+        <a href="media.html" class="preview-card reveal reveal-d1">
+          <div class="preview-num">02</div>
+          <div class="preview-badge">Social · CU Boulder Athletics</div>
+          <div class="preview-title">Digital Content Creation</div>
+          <p class="preview-desc">3.4M+ Instagram views, 38% follower growth, and 200K+ interactions — managing Spirit Squad's social media presence across platforms.</p>
+          <div class="preview-tags">
+            <span class="tag">Instagram</span>
+            <span class="tag">Content</span>
+            <span class="tag">3.4M+ Views</span>
+          </div>
+        </a>
+
+        <a href="media.html" class="preview-card reveal reveal-d2">
+          <div class="preview-num">03</div>
+          <div class="preview-badge">Partnerships · 8+ Brands</div>
+          <div class="preview-title">Brand Collaborations</div>
+          <p class="preview-desc">Worked with Nissan, Toyota, Pepsi, Urban Outfitters, Big 12, WWE, and the Broncos through Spirit Squad marketing and brand activation events.</p>
+          <div class="preview-tags">
+            <span class="tag">Nissan</span>
+            <span class="tag">Toyota</span>
+            <span class="tag">Pepsi</span>
+            <span class="tag">+5 More</span>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="preview-cta">
+        <a href="media.html" class="btn-gold">View All Media</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT SECTION
+       No form — just direct contact links.
+       Update email and LinkedIn URL before publishing!
+       ============================================================ -->
+  <section class="contact-section" id="contact">
+    <div class="section">
+      <div class="section-eyebrow reveal">Contact</div>
+      <h2 class="reveal">Let's Connect</h2>
+      <p class="section-intro reveal">Open to internships, collaborations, and good conversations.</p>
+      <div class="reveal">
+        <p class="contact-intro">I'm looking for software engineering internship opportunities for Summer 2026. If you want to talk about a role, a project, or just say hi, reach out through any of the links below.</p>
+        <div class="contact-links">
+          <!-- TODO: Replace with your real email address -->
+          <a id="email-link" href="#" class="c-link" onclick="return false;">
+            <div><div class="c-link-label">Email</div><div class="c-link-val" id="email-display">&#71;&#97;&#118;&#105;&#110;&#46;&#119;&#97;&#108;&#107;&#101;&#114;&#64;&#99;&#111;&#108;&#111;&#114;&#97;&#100;&#111;&#46;&#101;&#100;&#117;</div></div>
+            <div class="c-link-arrow">→</div>
+          </a>
+          <!-- GitHub profile — already correct -->
+          <a href="https://github.com/GavinCU" target="_blank" rel="noopener noreferrer" class="c-link">
+            <div><div class="c-link-label">GitHub</div><div class="c-link-val">github.com/GavinCU</div></div>
+            <div class="c-link-arrow">→</div>
+          </a>
+          <!-- TODO: Replace [username] with your actual LinkedIn handle -->
+          <a href="https://www.linkedin.com/in/gavin-walker5" target="_blank" rel="noopener noreferrer" class="c-link">
+            <div><div class="c-link-label">LinkedIn</div><div class="c-link-val">linkedin.com/in/gavin-walker5</div></div>
+            <div class="c-link-arrow">→</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- ============================================================
+       FOOTER
+       Simple three-part footer: logo | page links | tagline
+       ============================================================ -->
+  <footer>
+    <span class="footer-logo">GW</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="lead4000.html">LEAD 4000</a>
+      <a href="resume.html">Resume</a>
+    </div>
+    <span class="footer-text">SKO Buffs 🦬</span>
+  </footer>
+
+  <!-- ============================================================
+       CLICK SPARK CANVAS
+       Fixed full-screen canvas that sits above everything.
+       pointer-events: none so it never blocks any clicks.
+       z-index 99998 keeps it below the mobile menu (250) and
+       spark canvas itself doesn't need to be above the menu.
+       ============================================================ -->
+  <canvas id="spark-canvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:99998;"></canvas>
+
+  <!-- ============================================================
+       CLICK SPARK SCRIPT
+       Draws 8 gold spark lines radiating outward from every click.
+       Uses requestAnimationFrame for smooth 60fps animation.
+       ============================================================ -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    (function() {
+      const canvas = document.getElementById('spark-canvas');
+      const ctx    = canvas.getContext('2d');
+
+      // Array holding all active sparks currently animating
+      let sparks = [];
+
+      // ── Tunable config — change these to adjust the effect ──
+      const CONFIG = {
+        sparkColor:  '#C9A227', // CU gold — matches the site palette
+        sparkSize:   28,        // length of each spark line in pixels
+        sparkRadius: 22,        // how far sparks travel outward from click point
+        sparkCount:  8,         // number of sparks per click (evenly spaced 360°)
+        duration:    450,       // milliseconds until a spark fully disappears
+        lineWidth:   2          // stroke thickness of each spark line
+      };
+
+      // Always match the canvas to the window size
+      function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      // Ease-out curve: fast at start, slows toward end
+      // t = 0 at spark birth, t = 1 at spark death
+      function easeOut(t) { return t * (2 - t); }
+
+      // On every click anywhere on the page, spawn a full set of sparks
+      window.addEventListener('click', (e) => {
+        const now = performance.now();
+
+        // Create sparkCount sparks, evenly distributed around 360°
+        for (let i = 0; i < CONFIG.sparkCount; i++) {
+          sparks.push({
+            x:         e.clientX,                               // click X position
+            y:         e.clientY,                               // click Y position
+            angle:     (2 * Math.PI * i) / CONFIG.sparkCount,  // angle in radians
+            startTime: now                                       // birth timestamp
+          });
+        }
+      });
+
+      // Main animation loop — runs every frame via requestAnimationFrame
+      (function loop(ts) {
+        // Clear the entire canvas each frame
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Update and draw each spark, removing expired ones
+        sparks = sparks.filter(s => {
+          const elapsed  = ts - s.startTime;
+
+          // Remove sparks that have lived past their duration
+          if (elapsed >= CONFIG.duration) return false;
+
+          // progress: 0 = just born, 1 = about to die
+          const progress = elapsed / CONFIG.duration;
+          const eased    = easeOut(progress);
+
+          // How far the spark has traveled from the click point
+          const dist = eased * CONFIG.sparkRadius;
+
+          // Line gets shorter as it ages (shrinks from CONFIG.sparkSize to 0)
+          const len = CONFIG.sparkSize * (1 - eased);
+
+          // Alpha fades from 1 to 0 as spark ages
+          const alpha = 1 - progress;
+
+          // Calculate the two endpoints of the spark line
+          const x1 = s.x + dist       * Math.cos(s.angle); // tail
+          const y1 = s.y + dist       * Math.sin(s.angle);
+          const x2 = s.x + (dist+len) * Math.cos(s.angle); // head
+          const y2 = s.y + (dist+len) * Math.sin(s.angle);
+
+          // Draw the spark
+          ctx.globalAlpha = alpha;
+          ctx.strokeStyle = CONFIG.sparkColor;
+          ctx.lineWidth   = CONFIG.lineWidth;
+          ctx.lineCap     = 'round'; // rounded ends look softer
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
+          ctx.stroke();
+
+          return true; // keep this spark alive
+        });
+
+        // Reset global alpha so nothing else is affected
+        ctx.globalAlpha = 1;
+
+        // Schedule next frame
+        requestAnimationFrame(loop);
+      })(0);
+    })();
+  </script>
+
+  <!-- ============================================================
+       AURORA WEBGL SCRIPT
+       Renders an animated noise-based aurora in the hero background.
+       Uses raw WebGL — no libraries needed.
+
+       To tweak the effect:
+         uAmplitude: height of the wave (try 0.5 to 2.0)
+         uBlend:     softness of the edge (try 0.3 to 1.0)
+         uC0/C1/C2:  the three color stops across the gradient
+       ============================================================ -->
+  <script>
+    (function() {
+      const canvas = document.getElementById('aurora-canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (!gl) return; // bail silently if WebGL isn't supported
+
+      // ── Vertex shader: positions the full-screen triangle ──
+      const VERT = `
+        attribute vec2 position;
+        void main() { gl_Position = vec4(position, 0.0, 1.0); }
+      `;
+
+      // ── Fragment shader: generates the aurora effect ──
+      // Uses simplex noise to create organic flowing shapes.
+      // The color ramp blends between three colors across the X axis.
+      const FRAG = `
+        precision highp float;
+        uniform float uTime;       /* seconds since page load */
+        uniform float uAmplitude;  /* wave height multiplier */
+        uniform float uBlend;      /* edge softness */
+        uniform vec2  uResolution; /* canvas dimensions in pixels */
+        uniform vec3  uColor0;     /* left color stop */
+        uniform vec3  uColor1;     /* center color stop (peak) */
+        uniform vec3  uColor2;     /* right color stop */
+
+        /* Simplex noise helper — permutes a vec3 */
+        vec3 permute3(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
+
+        /* 2D simplex noise — returns a value roughly in [-1, 1] */
+        float snoise(vec2 v) {
+          const vec4 C = vec4(0.211324865405187,0.366025403784439,-0.577350269189626,0.024390243902439);
+          vec2 i  = floor(v + dot(v, C.yy));
+          vec2 x0 = v - i + dot(i, C.xx);
+          vec2 i1 = (x0.x > x0.y) ? vec2(1.0,0.0) : vec2(0.0,1.0);
+          vec4 x12 = x0.xyxy + C.xxzz;
+          x12.xy -= i1;
+          i = mod(i, 289.0);
+          vec3 p = permute3(permute3(i.y+vec3(0.0,i1.y,1.0))+i.x+vec3(0.0,i1.x,1.0));
+          vec3 m = max(0.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.0);
+          m = m*m*m*m;
+          vec3 x = 2.0*fract(p*C.www)-1.0;
+          vec3 h = abs(x)-0.5;
+          vec3 ox = floor(x+0.5);
+          vec3 a0 = x-ox;
+          m *= 1.79284291400159-0.85373472095314*(a0*a0+h*h);
+          vec3 g;
+          g.x  = a0.x*x0.x+h.x*x0.y;
+          g.yz = a0.yz*x12.xz+h.yz*x12.yw;
+          return 130.0*dot(m,g);
+        }
+
+        void main() {
+          /* Normalize pixel coordinates to 0-1 range */
+          vec2 uv = gl_FragCoord.xy / uResolution;
+
+          /* Blend between three color stops based on X position */
+          vec3 rampColor;
+          if (uv.x < 0.5) {
+            rampColor = mix(uColor0, uColor1, uv.x * 2.0);       /* left → center */
+          } else {
+            rampColor = mix(uColor1, uColor2, (uv.x - 0.5)*2.0); /* center → right */
+          }
+
+          /* Generate noise-based wave height, animated over time */
+          float height = snoise(vec2(uv.x*2.0+uTime*0.1, uTime*0.25))*0.5*uAmplitude;
+          height = exp(height);               /* exponential curve for sharper peaks */
+          height = (uv.y*2.0 - height + 0.2); /* map to vertical position */
+          float intensity = 0.6 * height;
+
+          /* Smooth edge where aurora meets background */
+          float midPoint   = 0.20;
+          float auroraAlpha = smoothstep(midPoint-uBlend*0.5, midPoint+uBlend*0.5, intensity);
+
+          /* Final color output with pre-multiplied alpha */
+          vec3 auroraColor = intensity * rampColor;
+          gl_FragColor = vec4(auroraColor*auroraAlpha, auroraAlpha);
+        }
+      `;
+
+      // Compile a shader from source
+      function makeShader(type, src) {
+        const s = gl.createShader(type);
+        gl.shaderSource(s, src);
+        gl.compileShader(s);
+        return s;
+      }
+
+      // Link vertex + fragment shaders into a program
+      const prog = gl.createProgram();
+      gl.attachShader(prog, makeShader(gl.VERTEX_SHADER,   VERT));
+      gl.attachShader(prog, makeShader(gl.FRAGMENT_SHADER, FRAG));
+      gl.linkProgram(prog);
+      gl.useProgram(prog);
+
+      // Upload a single full-screen triangle (covers entire canvas)
+      // Three vertices at (-1,-1), (3,-1), (-1,3) — bigger than clip space
+      // so it fills the entire viewport without needing two triangles
+      const buf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+      const posLoc = gl.getAttribLocation(prog, 'position');
+      gl.enableVertexAttribArray(posLoc);
+      gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+      // Get references to all uniform locations
+      const uTime      = gl.getUniformLocation(prog, 'uTime');
+      const uAmplitude = gl.getUniformLocation(prog, 'uAmplitude');
+      const uBlend     = gl.getUniformLocation(prog, 'uBlend');
+      const uRes       = gl.getUniformLocation(prog, 'uResolution');
+      const uC0        = gl.getUniformLocation(prog, 'uColor0');
+      const uC1        = gl.getUniformLocation(prog, 'uColor1');
+      const uC2        = gl.getUniformLocation(prog, 'uColor2');
+
+      // Convert a hex color string to an [r, g, b] array in 0-1 range
+      function hex(h) {
+        return [
+          parseInt(h.slice(1,3),16)/255,
+          parseInt(h.slice(3,5),16)/255,
+          parseInt(h.slice(5,7),16)/255
+        ];
+      }
+
+      // ── Aurora color palette (CU Boulder theme) ──
+      // Change these hex values to adjust the aurora colors
+      gl.uniform3fv(uC0, hex('#6b4a00')); // deep dark amber (left edge)
+      gl.uniform3fv(uC1, hex('#C9A227')); // CU gold (center / peak)
+      gl.uniform3fv(uC2, hex('#3a2000')); // dark burnt orange (right edge)
+
+      // ── Aurora intensity settings ──
+      gl.uniform1f(uAmplitude, 1.0); // wave height — increase for bigger aurora
+      gl.uniform1f(uBlend,     0.6); // edge softness — increase for softer fade
+
+      // Enable alpha blending so aurora is transparent where alpha = 0
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA); // pre-multiplied alpha
+
+      // Resize canvas and update resolution uniform when window changes
+      function resize() {
+        const w = canvas.offsetWidth, h = canvas.offsetHeight;
+        canvas.width  = w;
+        canvas.height = h;
+        gl.viewport(0, 0, w, h);
+        gl.uniform2f(uRes, w, h);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      // Track start time so uTime increases from 0
+      const t0 = performance.now();
+
+      // Animation loop — runs every frame
+      (function loop() {
+        // Update time uniform (seconds since load)
+        gl.uniform1f(uTime, (performance.now()-t0)/1000);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.drawArrays(gl.TRIANGLES, 0, 3); // draw the full-screen triangle
+        requestAnimationFrame(loop);
+      })();
+    })();
+  </script>
+
+  <!-- ============================================================
+       MAIN SCRIPTS
+       All interactive features for the page.
+       Order matters — aurora and sparks run in their own IIFEs above.
+       ============================================================ -->
+  <script>
+
+    // ══════════════════════════════════════════════════════════════
+    // DECRYPT TEXT EFFECT
+    // On mouseenter: every letter scrambles to random characters,
+    // then reveals left-to-right while unrevealed chars keep scrambling.
+    // On mouseleave: snaps back to the original text instantly.
+    // Applied to both "Gavin" (#decrypt-first) and "Walker" (#decrypt-last).
+    // ══════════════════════════════════════════════════════════════
+
+    // Pool of characters used for scrambling
+    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*';
+
+    // Returns a random character from the pool
+    function randChar() { return CHARS[Math.floor(Math.random() * CHARS.length)]; }
+
+    // Sets up the decrypt effect on a single element
+    function initDecrypt(el, originalText) {
+
+      // Wrap each character in its own <span> with the original char stored as data-char
+      el.innerHTML = originalText.split('').map((ch, i) =>
+        ch === ' ' ? ' ' : `<span class="decrypt-char" data-char="${ch}" data-index="${i}">${ch}</span>`
+      ).join('');
+
+      const spans    = Array.from(el.querySelectorAll('.decrypt-char'));
+      let   animId   = null;  // setTimeout ID for the current animation frame
+      let   isRunning = false; // prevents multiple animations running simultaneously
+
+      // Reveals letters one by one from left to right while scrambling the rest
+      function revealSequential() {
+        let index         = 0; // which letter to reveal next
+        let scrambleCount = 0; // how many scramble ticks have elapsed
+
+        function tick() {
+          scrambleCount++;
+
+          // Every tick: scramble all unrevealed letters
+          spans.forEach((s, i) => {
+            if (i >= index && !s.classList.contains('revealed')) {
+              s.textContent = randChar();
+              s.classList.add('encrypted');
+            }
+          });
+
+          // Every 3rd tick: permanently reveal the next letter
+          if (scrambleCount % 3 === 0 && index < spans.length) {
+            spans[index].textContent = spans[index].dataset.char; // restore original
+            spans[index].classList.remove('encrypted');
+            spans[index].classList.add('revealed');
+            index++;
+          }
+
+          // Continue animating until all letters are revealed
+          if (index < spans.length || scrambleCount < spans.length * 3) {
+            animId = setTimeout(tick, 40); // 40ms per frame ≈ 25fps scramble
+          } else {
+            // Animation complete — ensure every letter shows its real character
+            spans.forEach(s => {
+              s.textContent = s.dataset.char;
+              s.classList.remove('encrypted');
+              s.classList.add('revealed');
+            });
+            isRunning = false;
+          }
+        }
+        tick(); // kick off the first frame
+      }
+
+      // Cancels the animation and restores all letters to their original state
+      function reset() {
+        clearTimeout(animId);
+        isRunning = false;
+        spans.forEach(s => {
+          s.textContent = s.dataset.char;
+          s.classList.remove('encrypted', 'revealed');
+        });
+      }
+
+      // Trigger on hover: scramble everything then reveal sequentially
+      el.addEventListener('mouseenter', () => {
+        if (isRunning) return; // don't restart mid-animation
+        isRunning = true;
+
+        // First: instantly scramble all letters
+        spans.forEach(s => {
+          s.classList.remove('revealed');
+          s.classList.add('encrypted');
+          s.textContent = randChar();
+        });
+
+        // Then start the sequential reveal
+        revealSequential();
+      });
+
+      // Reset on mouse leave — snap back to original text
+      el.addEventListener('mouseleave', reset);
+    }
+
+    // Initialize decrypt effect on both parts of the name
+    initDecrypt(document.getElementById('decrypt-first'), 'Gavin');
+    initDecrypt(document.getElementById('decrypt-last'),  'Walker');
+
+
+    // ══════════════════════════════════════════════════════════════
+    // TYPED TEXT EFFECT
+    // Cycles through an array of phrases, typing and deleting each one.
+    // The blinking cursor is a CSS-animated span (see .typed-cursor above).
+    // ══════════════════════════════════════════════════════════════
+
+    // Phrases to cycle through — add/remove/edit these freely
+    const phrases = [
+      'Content Creator',
+      'CS @ CU Boulder',
+      'Leadership Minor',
+      'Author in Progress',
+      'Student Athlete'
+    ];
+
+    let phraseIndex = 0;  // which phrase we're currently on
+    let charIndex   = 0;  // how many characters are currently visible
+    let deleting    = false; // true when we're backspacing
+
+    const typedEl = document.getElementById('typedText');
+
+    function type() {
+      const current = phrases[phraseIndex];
+
+      if (!deleting) {
+        // ── Typing forward ──
+        typedEl.textContent = current.slice(0, charIndex + 1);
+        charIndex++;
+
+        if (charIndex === current.length) {
+          // Reached the end — pause before deleting
+          deleting = true;
+          setTimeout(type, 1800); // 1.8s pause at full phrase
+          return;
+        }
+      } else {
+        // ── Deleting backward ──
+        typedEl.textContent = current.slice(0, charIndex - 1);
+        charIndex--;
+
+        if (charIndex === 0) {
+          // Fully deleted — move to next phrase
+          deleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+        }
+      }
+
+      // Schedule next character: delete is faster than typing
+      setTimeout(type, deleting ? 50 : 90);
+    }
+
+    // Start the typing effect after a short delay
+    // (gives page load animations time to finish first)
+    setTimeout(type, 1200);
+
+
+    // ══════════════════════════════════════════════════════════════
+    // TILT CARD EFFECT
+    // The photo card in the hero right panel tilts in 3D to follow
+    // the mouse cursor. Three layers create the full effect:
+    //   1. rotateX/rotateY on the card itself (the 3D tilt)
+    //   2. tiltShine: radial gradient that follows cursor position
+    //   3. tiltFoil: diagonal gold gradient that shifts with tilt angle
+    // On mouseleave: smooth snap back using cubic-bezier easing.
+    // ══════════════════════════════════════════════════════════════
+
+    const tWrap = document.getElementById('tiltWrap');
+    const tCard = document.getElementById('tiltCard');
+    const tShine = document.getElementById('tiltShine');
+    const tFoil  = document.getElementById('tiltFoil');
+
+    tWrap.addEventListener('mousemove', (e) => {
+      const rect = tWrap.getBoundingClientRect();
+
+      // Normalize cursor position to -1 to +1 range relative to card center
+      const dx = (e.clientX - rect.left  - rect.width  / 2) / (rect.width  / 2);
+      const dy = (e.clientY - rect.top   - rect.height / 2) / (rect.height / 2);
+
+      // Convert to rotation angles (max ±18 degrees)
+      const rotX = -dy * 18; // tilt up/down (inverted so it feels natural)
+      const rotY =  dx * 18; // tilt left/right
+
+      // Apply 3D transform + slight scale-up for depth feel
+      tCard.style.transition = 'transform 0.08s ease-out, box-shadow 0.08s ease-out';
+      tCard.style.transform  = `rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.05,1.05,1.05)`;
+
+      // Dynamic shadow shifts in the opposite direction of the tilt
+      tCard.style.boxShadow = `0 30px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,162,39,0.4), ${-rotY*1.5}px ${rotX*1.5}px 40px rgba(201,162,39,0.08)`;
+
+      // Update shine: radial highlight at the exact cursor position
+      const sx = ((e.clientX - rect.left)  / rect.width  * 100).toFixed(0);
+      const sy = ((e.clientY - rect.top)   / rect.height * 100).toFixed(0);
+      tShine.style.opacity    = '1';
+      tShine.style.background = `radial-gradient(circle at ${sx}% ${sy}%, rgba(255,255,255,0.13) 0%, rgba(255,255,255,0.04) 40%, transparent 70%)`;
+
+      // Update foil: gold shimmer angle shifts with the Y rotation
+      tFoil.style.opacity    = '1';
+      tFoil.style.background = `linear-gradient(${135 + rotY*2}deg, transparent 30%, rgba(201,162,39,0.05) 45%, rgba(201,162,39,0.13) 50%, rgba(201,162,39,0.05) 55%, transparent 70%)`;
+    });
+
+    tWrap.addEventListener('mouseleave', () => {
+      // Snap back to flat with a bouncy cubic-bezier for satisfying feel
+      tCard.style.transition = 'transform 0.6s cubic-bezier(0.23,1,0.32,1), box-shadow 0.6s ease';
+      tCard.style.transform  = 'rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
+      tCard.style.boxShadow  = '0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,162,39,0.2)';
+      tShine.style.opacity   = '0';
+      tFoil.style.opacity    = '0';
+    });
+
+
+    // ══════════════════════════════════════════════════════════════
+    // SCROLL PROGRESS BAR + BACK TO TOP BUTTON
+    // Progress bar: thin gold line at top, width = scroll % of page.
+    // Back to top: hidden until 400px scroll, smooth scroll on click.
+    // ══════════════════════════════════════════════════════════════
+
+    const progressBar = document.getElementById('scrollProgress');
+    const backToTop   = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const total    = document.documentElement.scrollHeight - window.innerHeight;
+
+      // Update progress bar width as a percentage of total scroll distance
+      progressBar.style.width = (scrolled / total * 100) + '%';
+
+      // Show/hide the back-to-top button based on scroll position
+      if (scrolled > 400) backToTop.classList.add('visible');
+      else                backToTop.classList.remove('visible');
+    });
+
+    // Smooth scroll to top when button is clicked
+    backToTop.addEventListener('click', (e) => {
+      e.preventDefault(); // stop the # from appearing in the URL
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+
+    // ══════════════════════════════════════════════════════════════
+    // HAMBURGER / MOBILE MENU
+    // toggleMobileMenu: opens or closes the full-screen overlay.
+    // closeMobileMenu: always closes — called by each nav link's onclick.
+    // Body overflow is locked while menu is open to prevent scroll.
+    // ══════════════════════════════════════════════════════════════
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const btn  = document.getElementById('hamburger');
+
+      menu.classList.toggle('open'); // show/hide overlay
+      btn.classList.toggle('open');  // animate bars → X
+
+      // Lock body scroll when menu is open so background doesn't scroll
+      document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+    }
+
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = ''; // restore scrolling
+    }
+
+
+    // ══════════════════════════════════════════════════════════════
+    // SCROLL REVEAL
+    // Elements with class="reveal" start invisible (opacity: 0,
+    // translateY: 28px — defined in style.css).
+    // IntersectionObserver adds class="visible" when element enters
+    // the viewport, triggering the CSS transition to fade/slide in.
+    // ══════════════════════════════════════════════════════════════
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible'); // triggers CSS transition
+        }
+      });
+    }, { threshold: 0.08 }); // trigger when 8% of element is visible
+
+    // Observe every element that has the reveal class
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  </script>
+</body>
+</html>

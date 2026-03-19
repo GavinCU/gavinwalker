@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+    <!-- Security meta tags -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.instagram.com; img-src 'self' https://img.youtube.com https://i.ytimg.com data: blob:; frame-src https://www.youtube.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self';" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Gavin Walker</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 2px;
+    }
+
+    /* All cards — same height enforced by grid rows */
+    .project-card {
+      background: var(--mid);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card:hover { border-color: var(--border2); }
+
+    /* No more featured/wide layout — all cards are standard size */
+
+    .project-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+    .project-card:hover::after { width: 100%; }
+
+    .project-top {
+      padding: 2rem 2rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .project-bg-num {
+      position: absolute;
+      top: 1rem; right: 1.5rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 72px;
+      color: rgba(201,162,39,0.06);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .project-badge {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border: 1px solid var(--border2);
+      color: var(--gold-dim);
+      background: rgba(201,162,39,0.06);
+      margin-bottom: 0.9rem;
+    }
+
+    .project-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 1.5px;
+      color: var(--text);
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-body {
+      padding: 1.5rem 2rem 2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .project-card.featured .project-body {
+      justify-content: center;
+    }
+
+    .project-desc {
+      font-family: 'Crimson Pro', serif;
+      font-size: 16px;
+      color: var(--text2);
+      line-height: 1.8;
+    }
+
+    .project-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+
+    .project-footer {
+      padding: 1rem 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 1.5rem;
+      background: var(--darker);
+    }
+
+    .proj-link {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .proj-link:hover { color: var(--gold); }
+
+    .skills-highlight {
+      background: var(--mid);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+
+    .skill-block {
+      background: var(--darker);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      transition: border-color 0.2s;
+    }
+    .skill-block:hover { border-color: var(--border2); }
+
+    .skill-icon {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      color: var(--gold);
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+
+    .skill-cat {
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 1rem;
+    }
+
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    @media (max-width: 900px) {
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+      .project-card.featured .project-top { border-right: none; border-bottom: 1px solid var(--border); }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">GW</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="media.html">Media</a></li>
+      <li><a href="lead4000.html" class="hide-mobile">LEAD 4000</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-bg">WORK</div>
+    <div class="page-eyebrow">Portfolio</div>
+    <h1 class="page-title">My <span>Projects</span></h1>
+    <p class="page-sub">A full collection of coursework, internship deliverables, and personal builds.</p>
+  </div>
+
+  <div class="gold-rule"></div>
+
+  <!-- PROJECTS -->
+  <section class="section" style="padding-top: 3rem;">
+
+    <div class="projects-grid">
+
+      <!-- Portfolio Website -->
+      <div class="project-card reveal" id="portfolio">
+        <div class="project-top">
+          <div class="project-bg-num">01</div>
+          <div class="project-badge">Front-End Development · Personal</div>
+          <div class="project-title">Personal Developer Portfolio Website</div>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">
+            A personal portfolio website designed to showcase computer science projects, experiences, and technical skills — built to create a professional online presence for recruiters and collaborators.
+          </p>
+          <p class="project-desc">
+            Built independently using HTML, CSS, and JavaScript. Features a responsive navigation bar, project display sections, and a clean layout that presents technical work in a professional format. Hosted on GitHub Pages.
+          </p>
+          <div class="project-stack">
+            <span class="tag tag-gold">HTML</span>
+            <span class="tag tag-gold">CSS</span>
+            <span class="tag tag-gold">JavaScript</span>
+            <span class="tag">Responsive Design</span>
+            <span class="tag">GitHub Pages</span>
+          </div>
+        </div>
+        <div class="project-footer">
+          <a href="https://github.com/GavinCU" target="_blank" rel="noopener noreferrer" class="proj-link">GitHub→</a>
+        </div>
+      </div>
+
+      <!-- Plant Community Blog -->
+      <div class="project-card reveal" id="plantblog">
+        <div class="project-top">
+          <div class="project-bg-num">02</div>
+          <div class="project-badge">Full-Stack · Course Project</div>
+          <div class="project-title">Plant Community Blog Web Application</div>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">
+           Woked with a team to create a social media platform created for plant lovers who want to share 
+their passion for plant care. This platform allows users to login to their 
+accounts and post photos of the plants they are caring for, along with tips 
+for growth or challenges they are facing. Users can also search for specific
+plants and be presented with posts from other users and their advice. Each 
+post can be tagged with relevant keywords, making it easy for users to 
+search for specific advice.
+          </p>
+          <p class="project-desc">
+            Developed as part of a software development course. Demonstrates skills in full-stack web development, database interaction, and building interactive user-centered platforms.
+          </p>
+          <div class="project-stack">
+            <span class="tag">HTML</span><span class="tag">CSS</span>
+            <span class="tag">JavaScript</span><span class="tag">Database</span>
+            <span class="tag">Full-Stack</span>
+          </div>
+        </div>
+        <div class="project-footer">
+         <a href="https://github.com/adge5559/Eden" target="_blank" rel="noopener noreferrer" class="proj-link">GitHub Repository →</a>
+        </div>
+      </div>
+
+      <!-- Nutrislice -->
+      <div class="project-card reveal reveal-d1" id="nutrislice">
+        <div class="project-top">
+          <div class="project-bg-num">03</div>
+          <div class="project-badge">UX Design · Course Project</div>
+          <div class="project-title">Nutrislice Mobile App Redesign</div>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">
+            Redesigned the Nutrislice mobile app as part of a user experience design course. Analyzed the existing interface to identify usability issues and created a redesigned version with more intuitive navigation, menu viewing, and meal information display.
+          </p>
+          <p class="project-desc">
+            Used Figma and UX design principles to develop a prototype of the improved interface. Demonstrates skills in user-centered design, usability analysis, and interface prototyping.
+          </p>
+          <div class="project-stack">
+            <span class="tag tag-gold">Figma</span>
+            <span class="tag">UX Research</span>
+            <span class="tag">Prototyping</span>
+            <span class="tag">Usability Analysis</span>
+          </div>
+        </div>
+        <div class="project-footer">
+          <a href="https://www.figma.com/deck/FTzbBxoXL0CgJHLJuTi31s/Project-3-slides---Gavin-Walker?node-id=1-53&t=N9iL4abEtU3hJCTF-1" target="_blank" rel="noopener noreferrer" class="proj-link">Figma Prototype & Presentation →</a>
+        </div>
+      </div>
+
+      <!-- Alumni C Club -->
+      <div class="project-card reveal reveal-d2" id="alumnicc">
+        <div class="project-top">
+          <div class="project-bg-num">04</div>
+          <div class="project-badge">Internship · CU Athletics</div>
+          <div class="project-title">Alumni C Club</div>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">
+            During my internship with the Alumni C Club, I focused on improving alumni engagement and digital communication by organizing digital content, analyzing engagement strategies, and supporting outreach efforts to strengthen connections between alumni and the university.
+          </p>
+          <p class="project-desc">
+            Collaborated with staff and student leaders to evaluate communication tools and improve visibility of alumni programs. Demonstrates skills in digital communication, project coordination, and using technology to support community engagement.
+          </p>
+          <div class="project-stack">
+            <span class="tag">Digital Communication</span>
+            <span class="tag">Project Coordination</span>
+            <span class="tag">Data Management</span>
+            <span class="tag">Social Media</span>
+          </div>
+        </div>
+        <div class="project-footer">
+          <a href="https://cubuffs.com/sports/alumni-c-club" target="_blank" rel="noopener noreferrer" class="proj-link">Learn More →</a>
+        </div>
+        </div>
+      </div>
+
+      <!-- WHOLE Program -->
+      <div class="project-card reveal" id="whole">
+        <div class="project-top">
+          <div class="project-bg-num">05</div>
+          <div class="project-badge">Internship · CU Athletics</div>
+          <div class="project-title">WHOLE Program Leadership Internship</div>
+        </div>
+        <div class="project-body">
+          <p class="project-desc">
+            As an intern with the WHOLE Program, I supported student-athletes across a wide range of needs by assisting with mental and physical wellness resources, managing and disposing of confidential documents in compliance with university policy, and updating program language for pamphlets and websites to appeal to a younger audience.
+          </p>
+          <p class="project-desc">
+            Worked closely with program coordinators to meet the needs of every student-athlete the program served. Highlights strengths in leadership development, collaboration, event planning, and working within team-based organizational environments.
+          </p>
+          <div class="project-stack">
+            <span class="tag">Leadership Development</span>
+            <span class="tag">Collaboration</span>
+            <span class="tag">Event Planning</span>
+            <span class="tag">Content Writing</span>
+          </div>
+        </div>
+        <div class="project-footer">
+          <a href="https://cubuffs.com/sports/2021/7/29/crawford-family-WHOLE-athlete" target="_blank" rel="noopener noreferrer" class="proj-link">Learn More →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS SNAPSHOT -->
+  <div class="skills-highlight">
+    <div class="section">
+      <div class="section-eyebrow reveal">Skills</div>
+      <h2 class="reveal">Technical Toolkit</h2>
+      <p class="section-intro reveal">Languages and tools used across these projects.</p>
+      <div class="skills-grid">
+        <div class="skill-block reveal">
+          <div class="skill-icon">{ }</div>
+          <div class="skill-cat">Languages</div>
+          <div class="skill-tags">
+            <span class="tag tag-gold">Python</span><span class="tag tag-gold">Java</span>
+            <span class="tag">C++</span><span class="tag">JavaScript</span><span class="tag">SQL</span>
+          </div>
+        </div>
+        <div class="skill-block reveal reveal-d1">
+          <div class="skill-icon">&lt;/&gt;</div>
+          <div class="skill-cat">Web & Frameworks</div>
+          <div class="skill-tags">
+            <span class="tag">HTML/CSS</span><span class="tag">React</span>
+            <span class="tag">Node.js</span><span class="tag">Flask</span>
+          </div>
+        </div>
+        <div class="skill-block reveal reveal-d2">
+          <div class="skill-icon">✦</div>
+          <div class="skill-cat">Design & UX</div>
+          <div class="skill-tags">
+            <span class="tag tag-gold">Figma</span><span class="tag">Prototyping</span>
+            <span class="tag">UX Research</span><span class="tag">Responsive</span>
+          </div>
+        </div>
+        <div class="skill-block reveal reveal-d3">
+          <div class="skill-icon">⌗</div>
+          <div class="skill-cat">Tools</div>
+          <div class="skill-tags">
+            <span class="tag tag-gold">Git</span><span class="tag">Linux</span>
+            <span class="tag">Docker</span><span class="tag">VS Code</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-logo">GW</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="media.html">Media</a>
+      <a href="lead4000.html">LEAD 4000</a>
+      <a href="resume.html">Resume</a>
+    </div>
+    <span class="footer-text"SKO Buff>s 🦬</span>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
