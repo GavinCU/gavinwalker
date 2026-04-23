@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-    <!-- Security meta tags -->
+  <!-- Security meta tags -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.instagram.com; img-src 'self' https://img.youtube.com https://i.ytimg.com data: blob:; frame-src https://www.youtube.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self';" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LEAD 4000 — Gavin Walker</title>
+  <title>LSM — Gavin Walker</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+
     .lead-intro {
       background: var(--mid);
       border: 1px solid var(--border);
@@ -19,7 +20,6 @@
       position: relative;
       overflow: hidden;
     }
-
     .lead-intro::before {
       content: 'LEAD';
       position: absolute;
@@ -31,7 +31,6 @@
       line-height: 1;
       pointer-events: none;
     }
-
     .lead-intro-body {
       font-family: 'Crimson Pro', serif;
       font-size: 17px;
@@ -40,14 +39,7 @@
       max-width: 680px;
     }
     .lead-intro-body strong { color: var(--text); font-weight: 600; }
-
-    .lead-meta {
-      display: flex;
-      gap: 2px;
-      margin-top: 1.5rem;
-      flex-wrap: wrap;
-    }
-
+    .lead-meta { display: flex; gap: 2px; margin-top: 1.5rem; flex-wrap: wrap; }
     .lead-meta-item {
       background: var(--darker);
       border: 1px solid var(--border);
@@ -56,28 +48,11 @@
       flex-direction: column;
       gap: 2px;
     }
-
-    .lead-meta-label {
-      font-size: 9px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text3);
-    }
-
-    .lead-meta-val {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 15px;
-      letter-spacing: 1px;
-      color: var(--text);
-    }
+    .lead-meta-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); }
+    .lead-meta-val { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 1px; color: var(--text); }
 
     /* ASSIGNMENT GRID */
-    .assignments-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-    }
-
+    .assignments-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
     .assignment-card {
       background: var(--mid);
       border: 1px solid var(--border);
@@ -88,7 +63,6 @@
       overflow: hidden;
     }
     .assignment-card:hover { border-color: var(--border2); }
-
     .assignment-card::after {
       content: '';
       position: absolute;
@@ -98,18 +72,11 @@
       transition: width 0.3s;
     }
     .assignment-card:hover::after { width: 100%; }
-
-    .assignment-card.empty {
-      border-style: dashed;
-      opacity: 0.6;
-    }
-
     .assignment-header {
       padding: 1.5rem 2rem 1.25rem;
       border-bottom: 1px solid var(--border);
       position: relative;
     }
-
     .a-num {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 52px;
@@ -118,7 +85,6 @@
       top: 0.75rem; right: 1.25rem;
       line-height: 1;
     }
-
     .a-badge {
       display: inline-block;
       font-size: 9px;
@@ -130,19 +96,6 @@
       background: rgba(201,162,39,0.06);
       margin-bottom: 0.75rem;
     }
-
-    .a-badge.submitted {
-      border-color: rgba(60,180,100,0.4);
-      color: rgba(60,180,100,0.8);
-      background: rgba(60,180,100,0.07);
-    }
-
-    .a-badge.pending {
-      border-color: rgba(201,162,39,0.3);
-      color: var(--gold-dim);
-      background: rgba(201,162,39,0.05);
-    }
-
     .a-title {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 22px;
@@ -150,7 +103,6 @@
       color: var(--text);
       line-height: 1.1;
     }
-
     .assignment-body {
       padding: 1.5rem 2rem;
       flex: 1;
@@ -158,30 +110,11 @@
       flex-direction: column;
       gap: 1rem;
     }
-
-    .a-desc {
-      font-family: 'Crimson Pro', serif;
-      font-size: 15px;
-      color: var(--text2);
-      line-height: 1.75;
-    }
-
-    .a-placeholder {
-      font-family: 'DM Mono', monospace;
-      font-size: 12px;
-      color: var(--text3);
-      padding: 1rem;
-      background: var(--darker);
-      border: 1px dashed var(--border);
-      line-height: 1.6;
-    }
-
     .a-reflection {
       background: rgba(201,162,39,0.04);
       border-left: 2px solid var(--gold-dim);
       padding: 1rem 1.25rem;
     }
-
     .a-reflection-label {
       font-size: 9px;
       letter-spacing: 2px;
@@ -189,7 +122,6 @@
       color: var(--gold-dim);
       margin-bottom: 0.4rem;
     }
-
     .a-reflection-text {
       font-family: 'Crimson Pro', serif;
       font-size: 14px;
@@ -197,7 +129,7 @@
       color: var(--text2);
       line-height: 1.7;
     }
-
+    .a-reflection-text strong { color: var(--text); font-style: normal; }
     .assignment-footer {
       padding: 0.85rem 2rem;
       border-top: 1px solid var(--border);
@@ -206,7 +138,6 @@
       gap: 1.5rem;
       align-items: center;
     }
-
     .a-link {
       font-size: 10px;
       letter-spacing: 1.5px;
@@ -217,21 +148,21 @@
     }
     .a-link:hover { color: var(--gold); }
 
-    /* REFLECTION SECTION */
-    .reflection-section {
+    /* LONG FORM PROSE CARDS — for philosophy, future growth */
+    .prose-section {
       background: var(--dark);
       border-top: 1px solid var(--border);
+      padding: 5rem 0;
     }
-
-    .reflection-card {
+    .prose-card {
       background: var(--mid);
       border: 1px solid var(--border);
       padding: 2.5rem;
       position: relative;
       overflow: hidden;
+      margin-bottom: 2px;
     }
-
-    .reflection-card::before {
+    .prose-card::before {
       content: '"';
       position: absolute;
       font-family: 'Bebas Neue', sans-serif;
@@ -242,20 +173,126 @@
       line-height: 1;
       pointer-events: none;
     }
-
-    .reflection-text {
+    .prose-text {
       font-family: 'Crimson Pro', serif;
-      font-size: 18px;
-      font-style: italic;
+      font-size: 17px;
       color: var(--text2);
-      line-height: 1.85;
+      line-height: 1.9;
       position: relative;
       z-index: 1;
+      max-width: 780px;
     }
-    .reflection-text strong { color: var(--text); font-style: normal; }
+    .prose-text strong { color: var(--text); font-style: normal; font-weight: 600; }
+    .prose-text p + p { margin-top: 1.25rem; }
+    .prose-pull {
+      border-left: 3px solid var(--gold);
+      padding: 1rem 1.5rem;
+      background: rgba(201,162,39,0.04);
+      margin: 1.5rem 0;
+    }
+    .prose-pull p {
+      font-family: 'Crimson Pro', serif;
+      font-size: 19px;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* TIMELINE */
+    .tl-section {
+      background: var(--darker);
+      border-top: 1px solid var(--border);
+      padding: 5rem 0;
+    }
+    .tl-wrap {
+      position: relative;
+      padding-left: 2rem;
+      max-width: 900px;
+    }
+    .tl-wrap::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold-dim) 10%, var(--gold-dim) 90%, transparent);
+    }
+    .tl-item {
+      position: relative;
+      padding: 0 0 3rem 2.5rem;
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -4px; top: 6px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--darker);
+    }
+    .tl-item.featured::before {
+      width: 12px; height: 12px;
+      left: -6px;
+      box-shadow: 0 0 0 3px rgba(201,162,39,0.2);
+    }
+    .tl-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 0.05em;
+      padding-top: 2px;
+      line-height: 1.5;
+    }
+    .tl-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 1px;
+      color: var(--text);
+      margin-bottom: 3px;
+      line-height: 1.1;
+    }
+    .tl-sub {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 0.5rem;
+    }
+    .tl-desc {
+      font-family: 'Crimson Pro', serif;
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.75;
+    }
+    .tl-reflection {
+      background: rgba(201,162,39,0.04);
+      border-left: 2px solid var(--gold-dim);
+      padding: 1rem 1.25rem;
+      margin-top: 1rem;
+    }
+    .tl-reflection-label {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 0.5rem;
+    }
+    .tl-reflection-text {
+      font-family: 'Crimson Pro', serif;
+      font-size: 14px;
+      font-style: italic;
+      color: var(--text2);
+      line-height: 1.75;
+    }
+    .tl-reflection-text p + p { margin-top: 0.75rem; }
 
     @media (max-width: 900px) {
       .assignments-grid { grid-template-columns: 1fr; }
+      .tl-item { grid-template-columns: 60px 1fr; gap: 1rem; }
     }
   </style>
 </head>
@@ -267,16 +304,16 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="projects.html" class="hide-mobile">Projects</a></li>
       <li><a href="media.html">Media</a></li>
-      <li><a href="lead4000.html" class="active">LEAD 4000</a></li>
+      <li><a href="lead4000.html" class="active">LSM</a></li>
       <li><a href="resume.html">Resume</a></li>
       <li><a href="index.html#contact" class="nav-cta">Contact</a></li>
     </ul>
   </nav>
 
   <div class="page-header">
-    <div class="page-header-bg">LEAD</div>
+    <div class="page-header-bg">LSM</div>
     <div class="page-eyebrow">Capstone Course</div>
-    <h1 class="page-title">LEAD <span>4000</span></h1>
+    <h1 class="page-title">LSM <span></span></h1>
     <p class="page-sub">Leadership capstone assignments, reflections, and course deliverables all in one place.</p>
   </div>
 
@@ -292,22 +329,10 @@
         <p style="margin-top:0.75rem;">All assignments, reflections, and deliverables from the course in one place, part of a broader eportfolio documenting my academic and professional development at CU Boulder.</p>
       </div>
       <div class="lead-meta">
-        <div class="lead-meta-item">
-          <span class="lead-meta-label">Course</span>
-          <span class="lead-meta-val">LEAD 4000</span>
-        </div>
-        <div class="lead-meta-item">
-          <span class="lead-meta-label">Minor</span>
-          <span class="lead-meta-val">Leadership Studies</span>
-        </div>
-        <div class="lead-meta-item">
-          <span class="lead-meta-label">Institution</span>
-          <span class="lead-meta-val">CU Boulder</span>
-        </div>
-        <div class="lead-meta-item">
-          <span class="lead-meta-label">Semester</span>
-          <span class="lead-meta-val">Spring 2026</span>
-        </div>
+        <div class="lead-meta-item"><span class="lead-meta-label">Course</span><span class="lead-meta-val">LEAD 4000</span></div>
+        <div class="lead-meta-item"><span class="lead-meta-label">Minor</span><span class="lead-meta-val">Leadership Studies</span></div>
+        <div class="lead-meta-item"><span class="lead-meta-label">Institution</span><span class="lead-meta-val">CU Boulder</span></div>
+        <div class="lead-meta-item"><span class="lead-meta-label">Semester</span><span class="lead-meta-val">Spring 2026</span></div>
       </div>
     </div>
 
@@ -327,12 +352,12 @@
         </div>
         <div class="assignment-body">
           <p class="a-reflection-text" style="margin-bottom:1rem;">
-            This introductory course established a foundation for understanding what leadership actually is. Moving beyond the idea that leadership simply means being in charge. The course explored a wide range of leadership styles and frameworks, examining how different approaches apply across different environments, communities, and challenges in the real world.
+            This introductory course established a foundation for understanding what leadership actually is and moving beyond the idea that leadership simply means being in charge. The course explored a wide range of leadership styles and frameworks, examining how different approaches apply across different environments, communities, and challenges in the real world.
           </p>
           <div class="a-reflection">
             <div class="a-reflection-label">Knowledge & Skills Gained</div>
             <p class="a-reflection-text">
-              The most significant takeaway was learning that no single leadership style fits every situation. Understanding how to read a context and adapt accordingly.
+              The most significant takeaway was learning that no single leadership style fits every situation. Understanding how to read a context and adapt accordingly has directly shaped how I approach my role as a Resident Assistant. I work with students across entirely different backgrounds, needs, and circumstances every single day. Recognizing when to step forward and when to step back became a skill I built here first.
             </p>
           </div>
         </div>
@@ -355,7 +380,7 @@
           <div class="a-reflection">
             <div class="a-reflection-label">Knowledge & Skills Gained</div>
             <p class="a-reflection-text">
-              This course gave me practical language and frameworks for something I was already doing intuitively. PRLC 1820 helped me understand the theory behind what makes teams function and gave me tools to be more intentional about how I show up in collective spaces.
+              This course gave me practical language and frameworks for something I was already doing intuitively. As a Resident Assistant, I am constantly building community within a floor of students who did not choose to live together. It means navigating group dynamics, conflict, and belonging from day one. PRLC 1820 helped me understand the theory behind what makes teams function and gave me tools to be more intentional about how I show up in collective spaces.
             </p>
           </div>
         </div>
@@ -373,12 +398,12 @@
         </div>
         <div class="assignment-body">
           <p class="a-reflection-text" style="margin-bottom:1rem;">
-            ENLP 3100 marked a shift into deeper, more challenging territory. Through intensive readings and reflective work, the course asked students to examine what it truly means to lead well not just in practice but in character. The focus was on self-reflection as an ongoing leadership practice, pushing past surface-level answers to sit with harder questions about identity, values, and growth.
+            ENLP 3100 marked a shift into deeper, more challenging territory. Through intensive readings and reflective work, the course asked students to examine what it truly means to lead well, not just in practice but in character. The focus was on self-reflection as an ongoing leadership practice, pushing past surface-level answers to sit with harder questions about identity, values, and growth.
           </p>
           <div class="a-reflection">
             <div class="a-reflection-label">Knowledge & Skills Gained</div>
             <p class="a-reflection-text">
-              The readings in this course were the most challenging I had encountered in the minor and the most rewarding. They pushed me to interrogate my own assumptions about what a good leader looks like and recognize the ways I had internalized narratives that did not fully reflect who I want to be.
+              The readings in this course were the most challenging I had encountered in the minor and the most rewarding. They pushed me to interrogate my own assumptions about what a good leader looks like and recognize the ways I had internalized narratives that did not fully reflect who I want to be. As an RA, being genuinely self-aware is not optional. Residents can tell immediately whether you are showing up authentically. This course deepened that capacity significantly.
             </p>
           </div>
         </div>
@@ -396,12 +421,12 @@
         </div>
         <div class="assignment-body">
           <p class="a-reflection-text" style="margin-bottom:1rem;">
-            PRLC 3800 introduced the concept of "wicked problems" complex, systemic issues that resist straightforward solutions and require leaders to think across disciplines, timelines, and perspectives. The course examined what it means to lead when there is no clear answer, only a set of tradeoffs, stakeholders, and competing values to navigate responsibly.
+            PRLC 3800 introduced the concept of "wicked problems". Complex, systemic issues that resist straightforward solutions and require leaders to think across disciplines, timelines, and perspectives. The course examined what it means to lead when there is no clear answer, only a set of tradeoffs, stakeholders, and competing values to navigate responsibly.
           </p>
           <div class="a-reflection">
             <div class="a-reflection-label">Knowledge & Skills Gained</div>
             <p class="a-reflection-text">
-              Understanding wicked problems reframed how I think about leadership entirely. It taught me that the ability to hold complexity without needing to resolve it quickly is itself a leadership skill. That thinking carries directly into my LEAD 4000 practicum, where my team is analyzing fraud in Boulder County.
+              Understanding wicked problems reframed how I think about leadership entirely. I came in expecting courses to give me frameworks that make hard things simpler and this course did the opposite. It taught me that the ability to hold complexity without needing to resolve it quickly is itself a leadership skill. That thinking carries directly into my LEAD 4000 practicum, where my team is analyzing fraud in Boulder County, a problem with no clean edges and no single root cause.
             </p>
           </div>
         </div>
@@ -434,154 +459,153 @@
       </div>
 
     </div>
+  </section>
 
-    <!-- ASSIGNMENTS 
-    <div class="section-eyebrow reveal" style="margin-bottom:0.75rem;">Assignments</div>
-    <h2 class="reveal">Course Deliverables</h2>
-    <p class="section-intro reveal">LEAD 4000 assignments and reflections added as the semester progresses.</p>
+  <!-- ============================================================
+       KEY MOMENTS OF LEARNING TIMELINE
+       5+ moments — 3 have full 200-word reflections (featured class)
+       ============================================================ -->
+  <div class="tl-section">
+    <div class="section" style="padding-top:0;">
+      <div class="section-eyebrow reveal">ePortfolio Requirement 4</div>
+      <h2 class="reveal">Key Moments of Learning</h2>
+      <p class="section-intro reveal">Five defining moments that shaped who I am as a leader at CU Boulder and beyond.</p>
 
-    <div class="assignments-grid">-->
+      <div class="tl-wrap reveal">
 
-      <!-- Assignment 1 
-      <div class="assignment-card reveal">
-        <div class="assignment-header">
-          <div class="a-num">01</div>
-          <div class="a-badge pending">Pending</div>
-          <div class="a-title">Assignment 1 Title</div>
-        </div>
-        <div class="assignment-body">
-          <div class="a-placeholder">
-            Replace this with your actual assignment title and description. Add the assignment prompt, what you submitted, and any key takeaways from completing it.
-          </div>
-          <div class="a-reflection">
-            <div class="a-reflection-label">Reflection</div>
-            <p class="a-reflection-text">What did this assignment teach you about yourself as a leader? Add your reflection here once completed.</p>
+        <!-- MOMENT 1 — Moving to Boulder -->
+        <div class="tl-item">
+          <div class="tl-year">2022<br>Fall</div>
+          <div>
+            <div class="tl-title">Moving to Boulder for College</div>
+            <div class="tl-sub">University of Colorado Boulder</div>
+            <div class="tl-desc">Left home and moved to CU Boulder not knowing anyone, having to build community, routines, and identity from scratch in an entirely new environment. The first real test of self-leadership and learning to navigate independence without a safety net.</div>
           </div>
         </div>
-        <div class="assignment-footer">
-          <a href="#" class="a-link">View Submission →</a>
-        </div>
-      </div>-->
 
-      <!-- Assignment 2 
-      <div class="assignment-card reveal reveal-d1">
-        <div class="assignment-header">
-          <div class="a-num">02</div>
-          <div class="a-badge pending">Pending</div>
-          <div class="a-title">Assignment 2 Title</div>
-        </div>
-        <div class="assignment-body">
-          <div class="a-placeholder">
-            Replace this with your actual assignment title and description. Add the assignment prompt, what you submitted, and any key takeaways from completing it.
-          </div>
-          <div class="a-reflection">
-            <div class="a-reflection-label">Reflection</div>
-            <p class="a-reflection-text">What did this assignment teach you about yourself as a leader? Add your reflection here once completed.</p>
+        <!-- MOMENT 2 — Spirit Squad (featured) -->
+        <div class="tl-item featured">
+          <div class="tl-year">2022<br>Fall</div>
+          <div>
+            <div class="tl-title">Joining the CU Boulder Spirit Squad</div>
+            <div class="tl-sub">CU Boulder Athletics · Marketing</div>
+            <div class="tl-desc">Joined the Spirit Squad marketing team, one of the most demanding and fulfilling commitments of my time at CU. Required showing up consistently, performing at a high level, and representing the university across events, cities, and national campaigns.</div>
           </div>
         </div>
-        <div class="assignment-footer">
-          <a href="#" class="a-link">View Submission →</a>
-        </div>
-      </div>-->
 
-      <!-- Assignment 3 
-      <div class="assignment-card reveal reveal-d2">
-        <div class="assignment-header">
-          <div class="a-num">03</div>
-          <div class="a-badge pending">Pending</div>
-          <div class="a-title">Assignment 3 Title</div>
-        </div>
-        <div class="assignment-body">
-          <div class="a-placeholder">
-            Replace this with your actual assignment title and description. Add the assignment prompt, what you submitted, and any key takeaways from completing it.
+        <!-- MOMENT 3 — PLC (featured, full reflection) -->
+        <div class="tl-item featured">
+          <div class="tl-year">2023<br>Spring</div>
+          <div>
+            <div class="tl-title">Professional Leadership Class (PLC)</div>
+            <div class="tl-sub">CU Boulder · Featured Scholar</div>
+            <div class="tl-desc">Selected for the Professional Leadership Class program at CU Boulder, a cohort-based leadership development experience that pushed me to examine leadership across disciplines and contexts.</div>
+            <div class="tl-reflection">
+              <div class="tl-reflection-label">Reflection — Why This Moment Mattered</div>
+              <div class="tl-reflection-text">
+                <p>The PLC was the first time I was in a room full of people who were explicitly trying to become better leaders not just better students or better athletes or better employees, but better leaders. That distinction mattered more than I expected. Coming in, I had accumulated a lot of leadership roles and responsibilities without ever deliberately studying what leadership actually meant. The PLC forced me to slow down and examine the habits and assumptions I had built up without realizing it.</p>
+                <p>What stuck with me most was a simple but uncomfortable question the program kept returning to: who benefits from the way you lead? I had always thought of leadership as something you did for a group or a goal. The PLC pushed me to think about whether the people around me, the ones I was supposedly leading, were actually better off because of how I showed up. That question unsettled me in a productive way. It made me realize that showing up consistently, which I had always prided myself on, was only part of the equation. The other part was being genuinely attentive to what the people around me needed, not just what I thought they needed.</p>
+                <p>Being recognized as a featured scholar on the CU Boulder PLC page was meaningful not because of the recognition itself, but because it represented a version of me that had stopped coasting on natural ability and started intentionally developing as a leader. That shift, from accidental leader to deliberate one, is something I trace back directly to this program.</p>
+              </div>
+            </div>
           </div>
-          <div class="a-reflection">
-            <div class="a-reflection-label">Reflection</div>
-            <p class="a-reflection-text">What did this assignment teach you about yourself as a leader? Add your reflection here once completed.</p>
-          </div>
         </div>
-        <div class="assignment-footer">
-          <a href="#" class="a-link">View Submission →</a>
-        </div>
-      </div>-->
 
-      <!-- Assignment 4 
-      <div class="assignment-card reveal reveal-d3">
-        <div class="assignment-header">
-          <div class="a-num">04</div>
-          <div class="a-badge pending">Pending</div>
-          <div class="a-title">Assignment 4 Title</div>
-        </div>
-        <div class="assignment-body">
-          <div class="a-placeholder">
-            Replace this with your actual assignment title and description. Add the assignment prompt, what you submitted, and any key takeaways from completing it.
+        <!-- MOMENT 4 — Becoming RA (featured, full reflection) -->
+        <div class="tl-item featured">
+          <div class="tl-year">2024<br>Fall</div>
+          <div>
+            <div class="tl-title">Becoming a Resident Assistant</div>
+            <div class="tl-sub">CU Boulder Housing & Dining</div>
+            <div class="tl-desc">Took on the role of Resident Assistant which I'm responsible for building community, supporting student wellbeing, and navigating difficult situations on a residential floor of students who did not choose to live together.</div>
+            <div class="tl-reflection">
+              <div class="tl-reflection-label">Reflection — Why This Moment Mattered</div>
+              <div class="tl-reflection-text">
+                <p>Becoming an RA taught me something that no course or leadership framework had fully prepared me for: how to show up for people who did not ask for you. Every other leadership role I had held came with some form of buy-in. Spirit Squad wanted to be there. SAAC members had chosen to be involved. But a residential floor is different. Those students chose their room, not their community. They did not sign up to be led, supported, or checked in on. And yet that is exactly what the role requires.</p>
+                <p>The hardest part of being an RA is not the late nights or the programming requirements, it is learning to build trust with people who have no particular reason to trust you. You cannot force community. You cannot demand that residents engage. What you can do is show up consistently, follow through on what you say, and make it clear through your actions over time that you are genuinely there for them, not performing a role, but actually present. That is where my leadership philosophy crystallized. Showing up consistently, even when no one is watching, is not just a value I hold. It became the only real currency of trust I had in that role.</p>
+                <p>The RA experience also expanded my capacity for empathy in ways I did not anticipate. I worked with students navigating mental health crises, family conflict, academic failure, and social isolation, all at once, in adjacent rooms. Learning to hold space for those realities without judgment or easy answers was the most significant leadership development I have experienced at CU Boulder. It made me a better listener, a more patient person, and a leader who leads from genuine care rather than position.</p>
+              </div>
+            </div>
           </div>
-          <div class="a-reflection">
-            <div class="a-reflection-label">Reflection</div>
-            <p class="a-reflection-text">What did this assignment teach you about yourself as a leader? Add your reflection here once completed.</p>
-          </div>
         </div>
-        <div class="assignment-footer">
-          <a href="#" class="a-link">View Submission →</a>
-        </div>
-      </div> -->
 
-      <!-- Assignment 5 
-      <div class="assignment-card reveal">
-        <div class="assignment-header">
-          <div class="a-num">05</div>
-          <div class="a-badge pending">Pending</div>
-          <div class="a-title">Assignment 5 Title</div>
-        </div>
-        <div class="assignment-body">
-          <div class="a-placeholder">
-            Replace this with your actual assignment title and description. Add the assignment prompt, what you submitted, and any key takeaways from completing it.
-          </div>
-          <div class="a-reflection">
-            <div class="a-reflection-label">Reflection</div>
-            <p class="a-reflection-text">What did this assignment teach you about yourself as a leader? Add your reflection here once completed.</p>
-          </div>
-        </div>
-        <div class="assignment-footer">
-          <a href="#" class="a-link">View Submission →</a>
-        </div>
-      </div>-->
-
-      <!-- Add More Placeholder 
-      <div class="assignment-card empty reveal reveal-d1">
-        <div class="assignment-header">
-          <div class="a-num">+</div>
-          <div class="a-badge pending">Coming Soon</div>
-          <div class="a-title">Future Assignment</div>
-        </div>
-        <div class="assignment-body">
-          <div class="a-placeholder">
-            Duplicate any assignment card above and update the number, title, description, and reflection to add more assignments as the semester progresses.
+        <!-- MOMENT 5 — VP of SAAC (featured, full reflection) -->
+        <div class="tl-item featured">
+          <div class="tl-year">2024<br>Spring</div>
+          <div>
+            <div class="tl-title">Elected VP of Internal — SAAC</div>
+            <div class="tl-sub">Student-Athlete Advisory Committee · CU Boulder</div>
+            <div class="tl-desc">Elected to serve as VP of Internal for the Student-Athlete Advisory Committee, overseeing internal committees, facilitating communication between student-athletes and administration, and advocating for student-athlete welfare at the university level.</div>
+            <div class="tl-reflection">
+              <div class="tl-reflection-label">Reflection — Why This Moment Mattered</div>
+              <div class="tl-reflection-text">
+                <p>Being elected VP of Internal for SAAC mattered because it was the first time I stepped into a formal leadership position that I had not been assigned, one I had to earn through the relationships and credibility I had built over time. I had been the Spirit Squad representative to SAAC for a year before running for VP. During that time I showed up, contributed, and built genuine relationships with people across programs and sports. The election felt like confirmation that informal leadership, the kind that happens before any title is assigned is what formal leadership is actually built on.</p>
+                <p>The VP role pushed me into territory I was less comfortable in: institutional advocacy, facilitating structured meetings, navigating competing priorities between student-athletes and university administration. These were not challenges I could solve by working harder or being more enthusiastic. They required me to listen more carefully, communicate more precisely, and hold space for perspectives that differed significantly from my own. The Minor had been teaching me that leadership is fundamentally relational and the VP role put that theory into direct practice.</p>
+                <p>One of the most formative parts of this experience was learning that formal authority does not automatically produce influence. Students follow leaders they trust, not titles they respect. That realization reinforced something I had been developing throughout the minor: that the leaders I most admire are the ones who lead because people want to follow them, not because the org chart says they should. SAAC pushed me to be that kind of leader, and I am still working toward it.</p>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="assignment-footer">
-          <span class="a-link" style="cursor: default;">Not Yet Assigned</span>
-        </div>
-      </div>
 
-    </div>
-  </section>-->
-
-  <!-- CAPSTONE REFLECTION 
-  <section class="reflection-section">
-    <div class="section">
-      <div class="section-eyebrow reveal">Capstone Reflection</div>
-      <h2 class="reveal">Overall Takeaways</h2>
-      <p class="section-intro reveal">How LEAD 4000 connects to your broader development as a leader and professional.</p>
-      <div class="reflection-card reveal">
-        <p class="reflection-text">
-          <strong>Replace this section</strong> with your overall capstone reflection once the course is underway. What has the LEAD 4000 experience taught you about yourself as a leader? How do the concepts from this course connect to your work as a CS student, Resident Assistant, SAAC VP, and intern? What are you taking into your next chapter?
-          <br><br>
-          This is a great place to tie everything together — your technical work, your leadership roles, and the lessons from this capstone — into a cohesive narrative about who you are and where you're going.
-        </p>
       </div>
     </div>
-  </section>-->
+  </div>
+
+  <!-- ============================================================
+       LEADERSHIP PHILOSOPHY
+       Requirement 5 — minimum 300 words
+       ============================================================ -->
+  <div class="prose-section">
+    <div class="section" style="padding-top:0;">
+      <div class="section-eyebrow reveal">ePortfolio Requirement 5</div>
+      <h2 class="reveal">Leadership Philosophy</h2>
+      <p class="section-intro reveal">What leadership means to me, my identity as a leader, and how that has evolved throughout the minor.</p>
+
+      <div class="prose-card reveal">
+        <div class="prose-text">
+
+          <div class="prose-pull">
+            <p>Leadership is showing up consistently, even when no one is watching.</p>
+          </div>
+
+          <p>That is my philosophy of leadership, and it encompasses me because it describes the way I have led in every role I have held at CU Boulder, not through announcement or performance, but through presence and follow-through. As a Resident Assistant, as VP of Internal for SAAC, as a member of Spirit Squad and the PLC the thread running through all of it is consistency. People do not follow you because of what you say you will do. They follow you because of what you actually do, repeatedly, over time, whether or not anyone is paying attention.</p>
+
+          <p>My identity as a leader is that of someone who leads by showing up. I am not the loudest person in the room. I am not the one with the most polished vision statement or the most elaborate strategy. What I am is reliable and I have come to understand that reliability, done with genuine care, is one of the most undervalued forms of leadership there is. I articulated this identity because it is the honest one. The minor pushed me to stop performing leadership and start examining it, and when I looked at what I actually do, this is what I found.</p>
+
+          <p>When I entered the Leadership Studies Minor, I carried a definition of leadership that was almost entirely about output. Leaders got things done. Leaders motivated people. Leaders produced results. That framing is not wrong but it is incomplete in ways I could not have articulated when I started. The courses, particularly ENLP 3100 and PRLC 3800, introduced me to a version of leadership that is less about driving outcomes and more about being in genuine relationship with the people and systems around you. Leadership comes in many forms and recognizing that was one of the most significant shifts the minor produced in me.</p>
+
+          <p>I used to evaluate my own leadership by asking whether things got done. I now ask whether the people around me were better because of how I showed up. Those are different questions, and they lead to different behavior. The second question is harder to answer and more uncomfortable to sit with which is probably why it is the more important one. That discomfort is something LEAD 4000 has continued to cultivate, and something I expect to carry with me long after this capstone is complete.</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       FUTURE GROWTH AND EVOLUTION
+       Requirement 6 — minimum 200-300 words
+       ============================================================ -->
+  <div class="prose-section" style="background:var(--mid);">
+    <div class="section" style="padding-top:0;">
+      <div class="section-eyebrow reveal">ePortfolio Requirement 6</div>
+      <h2 class="reveal">Future Growth & Evolution</h2>
+      <p class="section-intro reveal">How I see my leadership developing beyond the minor — and the questions I am still sitting with.</p>
+
+      <div class="prose-card reveal" style="background:var(--darker);">
+        <div class="prose-text">
+
+          <p>The honest answer to how my leadership will grow beyond the minor is that I do not know and LEAD 4000 has helped me make peace with that. I used to want clear trajectories. I wanted to be able to say that in five years I will be doing X, leading Y, having accomplished Z. What the minor has actually given me is a better set of questions to navigate with, rather than a roadmap to follow.</p>
+
+          <p>After graduation, my primary personal goal is to <strong>finish and publish the book I am writing</strong>. That project has already taught me more about leadership than any single course specifically about what it means to lead yourself through sustained, unglamorous, unrecognized work over a long period of time. No one assigns you chapters. No one checks in on your progress. You either show up for it or you do not. The book is the purest test of the philosophy I articulated above, and completing it will require every dimension of the leadership identity I have been building at CU.</p>
+
+          <p>Professionally, I intend to pursue software engineering a field that will test my leadership in new ways. Technical teams have their own cultures, dynamics, and hierarchies. I am curious about what happens to my understanding of relational leadership when the medium is code reviews and sprint cycles rather than one-to-ones and floor meetings. How do I build trust with people whose work I cannot always evaluate? How do I advocate for people in institutional structures built around output metrics? Those are the questions I am carrying forward.</p>
+
+          <p>The Leadership Studies Minor has not given me answers. It has given me the capacity to sit with better questions and the belief that doing so is itself a form of leadership worth practicing for the rest of my life.</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
 
   <footer>
     <span class="footer-logo">GW</span>
@@ -589,7 +613,7 @@
       <a href="index.html">Home</a>
       <a href="projects.html">Projects</a>
       <a href="media.html">Media</a>
-      <a href="lead4000.html">LEAD 4000</a>
+      <a href="lead4000.html">LSM</a>
       <a href="resume.html">Resume</a>
     </div>
     <span class="footer-text">SKO Buffs 🦬</span>
